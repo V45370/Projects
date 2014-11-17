@@ -1,0 +1,17 @@
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\MoneyV2.0.exe.config
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\MoneyV2.0.exe
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\MoneyV2.0.pdb
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\EntityFramework.dll
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\EntityFramework.xml
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.csprojResolveAssemblyReference.cache
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.HistoryForm.resources
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.Menu.resources
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.Properties.Resources.resources
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.csproj.GenerateResource.Cache
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.exe
+c:\users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.pdb
+C:\Users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.PasswordForm.resources
+C:\Users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.CategoryForm.resources
+C:\Users\vassi_000\documents\visual studio 2013\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.MoneyForm.resources
