@@ -20,14 +20,10 @@ namespace MoneyV2._0
             
         }
 
-        private void AddCategoryBtn_Click(object sender, EventArgs e)
+        private void OpenCategoryForm()
         {
             var CategoryForm = new CategoryForm(this);
-            CategoryForm.Show();
-            if (!areComboBoxesEmpty)
-            {
-                ReloadData();
-            }
+            CategoryForm.ShowDialog();
             
         }
 
@@ -42,37 +38,36 @@ namespace MoneyV2._0
                 + int.Parse(Qty1TB.Text) * 1).ToString();
         }
 
-        private void Control_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Up)
+        private void ValidateCategoryCombobox()
+        {            
+            existingCategoryValue = false;
+            //if selected control is CategoryComboBox
+            if (this.ActiveControl.Name == this.CategoryComboBox.Name)
             {
-                this.SelectNextControl((Control)sender, false, true, true, true);
-            }
-            else if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Enter)
-            {
-                //Validating data in Category and Aim comboboxes
-                existingCategoryValue = false;
-                //if selected control is CategoryComboBox
-                if (this.ActiveControl.Name == this.CategoryComboBox.Name)
+                //Search if entered value exists in combobox
+                foreach (var category in CategoryComboBox.Items)
                 {
-                    
-                    foreach (var category in CategoryComboBox.Items)
+                    if (category.ToString().Equals(CategoryComboBox.Text))
                     {
-                        if (category.ToString().Equals(CategoryComboBox.Text))
-                        {
-                            existingCategoryValue = true;
-                        }
+                        existingCategoryValue = true;
                     }
-                    
-                    if (existingCategoryValue == false)
+                }
+                //If entered value isn't in the combobox, we add it in database
+                if (existingCategoryValue == false)
+                {
+                    var currentSelectedCategory = CategoryComboBox.Text;
+                    if (String.IsNullOrEmpty(currentSelectedCategory))
                     {
-                        var CategoryForm = new CategoryForm(this);
-                        CategoryForm.Show();
-                        using (var db = new MoneyDbContext())
+                        MessageBox.Show("Моля въведете валидна категория");
+                    }
+                    else
+                    {
+                        OpenCategoryForm();
+                        using (var db = new DatabaseContext())
                         {
                             var newCategory = new Category();
-                            newCategory.CategoryName = CategoryComboBox.Text;
-                            if (isCategorySelectedIncome == false)
+                            newCategory.CategoryName = currentSelectedCategory;
+                            if (isNewMoneyCategoryIncome == false)
                             {
                                 newCategory.isIncome = false;
                             }
@@ -83,33 +78,69 @@ namespace MoneyV2._0
                             db.Categories.Add(newCategory);
                             db.SaveChanges();
                         }
+                        ReloadData();
+                        CategoryComboBox.Text = currentSelectedCategory;
+                    }
+
+                }
+            }
+        }
+        private void ValidateAimCombobox()
+        {
+            existingAimValue = false;
+            //if selected control is AimComboBox
+            if (this.ActiveControl.Name == this.AimComboBox.Name)
+            {
+                //MessageBox.Show(CategoryComboBox.Text);
+                foreach (var aim in AimComboBox.Items)
+                {
+                    if (aim.ToString().Equals(AimComboBox.Text))
+                    {
+                        existingAimValue = true;
                     }
                 }
-                existingAimValue = false;
-                //if selected control is AimComboBox
-                if (this.ActiveControl.Name == this.AimComboBox.Name)
+                //MessageBox.Show(existingCategoryValue.ToString());
+                if (existingAimValue == false)
                 {
-                    //MessageBox.Show(CategoryComboBox.Text);
-                    foreach (var aim in AimComboBox.Items)
+                    var currentSelectedAim = AimComboBox.Text;
+                    var currentSelectedCategory = CategoryComboBox.Text;
+                    if (String.IsNullOrEmpty(currentSelectedAim))
                     {
-                        if (aim.ToString().Equals(AimComboBox.Text))
-                        {
-                            existingAimValue = true;
-                        }
+                        MessageBox.Show("Моля въведете валидна цел");
                     }
-                    //MessageBox.Show(existingCategoryValue.ToString());
-                    if (existingAimValue == false)
+                    else
                     {
-                        using (var db = new MoneyDbContext())
+                        using (var db = new DatabaseContext())
                         {
                             var newAim = new Aim();
                             newAim.AimName = AimComboBox.Text;
-                            newAim.Categories.Where(c => c.CategoryName.Equals(CategoryComboBox.SelectedText));
                             db.Aims.Add(newAim);
                             db.SaveChanges();
+                            var selectedCategory = db.Categories
+                             .SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.SelectedValue.ToString()));
+                            selectedCategory.Aims.Add(newAim);
+                            db.SaveChanges();
                         }
+                        ReloadData();
+                        //return current selected items after reload
+                        CategoryComboBox.Text = currentSelectedCategory;
+                        AimComboBox.Text = currentSelectedAim;
                     }
+                    
                 }
+            }
+        }
+
+        private void Control_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+            {
+                this.SelectNextControl((Control)sender, false, true, true, true);
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {               
+                ValidateCategoryCombobox();
+                ValidateAimCombobox();
                 this.SelectNextControl((Control)sender, true, true, true, true);
             }          
                 
@@ -129,7 +160,7 @@ namespace MoneyV2._0
 
             
 
-            using (var db = new MoneyDbContext())
+            using (var db = new DatabaseContext())
             {
                 var categoryList = new List<string>();
                 var categories = db.Categories;
@@ -164,7 +195,7 @@ namespace MoneyV2._0
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //MessageBox.Show(CategoryComboBox.SelectedValue.ToString());
-            using (var db = new MoneyDbContext())
+            using (var db = new DatabaseContext())
             {
                 var aims = from a in db.Categories
                            from b in a.Aims
@@ -181,7 +212,7 @@ namespace MoneyV2._0
         public void ReloadData()
         {
             
-            using (var db = new MoneyDbContext())
+            using (var db = new DatabaseContext())
             {
                 //Reload Source ComboBox
                 //var sourceList = new List<string>();
@@ -226,7 +257,7 @@ namespace MoneyV2._0
 
         private void OutcomeFormOKBtn_Click(object sender, EventArgs e)
         {
-            using(var db = new MoneyDbContext())
+            using(var db = new DatabaseContext())
             {
                 var money = new Money();
                 money.Amount = double.Parse(this.OutcomeAmountTB.Text);
@@ -240,11 +271,11 @@ namespace MoneyV2._0
                 money.Quantity50 = int.Parse(Qty50TB.Text);
                 money.Quantity100 = int.Parse(Qty100TB.Text);
                 var foundCategoryInDb = db.Categories
-                    .SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.SelectedValue.ToString()));
+                    .SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.Text));
                 money.Category = foundCategoryInDb;
 
                 var foundAimInDb = db.Aims
-                    .SingleOrDefault(x => x.AimName.Equals(this.AimComboBox.SelectedValue.ToString()));
+                    .SingleOrDefault(x => x.AimName.Equals(this.AimComboBox.Text));
                 money.Aim = foundAimInDb;
                 
                 db.Money.Add(money);

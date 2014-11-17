@@ -33,9 +33,9 @@ namespace MoneyV2._0
             {
                 CashDeskListView.Items.RemoveAt(0);
             }
-            using (var db = new MoneyDbContext())
+            using (var db = new DatabaseContext())
             {
-                var moneys = db.Money;
+                var moneys = db.Money.ToList();
                 double tresor = 0;
                 int qty1 = 0;
                 int qty2 = 0;
@@ -45,31 +45,32 @@ namespace MoneyV2._0
                 int qty50 = 0;
                 int qty100 = 0;
 
-                //foreach (var money in moneys)
-                //{
-                //    if (money.isIncome == true)
-                //    {
-                //        qty1 += money.Quantity1;
-                //        qty2 += money.Quantity2;
-                //        qty5 += money.Quantity5;
-                //        qty10 += money.Quantity10;
-                //        qty20 += money.Quantity20;
-                //        qty50 += money.Quantity50;
-                //        qty100 += money.Quantity100;
-                //        tresor += money.Amount;
-                //    }
-                //    else
-                //    {
-                //        qty1 -= money.Quantity1;
-                //        qty2 -= money.Quantity2;
-                //        qty5 -= money.Quantity5;
-                //        qty10 -= money.Quantity10;
-                //        qty20 -= money.Quantity20;
-                //        qty50 -= money.Quantity50;
-                //        qty100 -= money.Quantity100;
-                //        tresor += money.Amount;
-                //    }
-                //}
+                foreach (var money in moneys)
+                {
+
+                    //if (money.Category.isIncome == true)
+                    //{
+                        qty1 += money.Quantity1;
+                        qty2 += money.Quantity2;
+                        qty5 += money.Quantity5;
+                        qty10 += money.Quantity10;
+                        qty20 += money.Quantity20;
+                        qty50 += money.Quantity50;
+                        qty100 += money.Quantity100;
+                        tresor += money.Amount;
+                    //}
+                    //else
+                    //{
+                    //    qty1 -= money.Quantity1;
+                    //    qty2 -= money.Quantity2;
+                    //    qty5 -= money.Quantity5;
+                    //    qty10 -= money.Quantity10;
+                    //    qty20 -= money.Quantity20;
+                    //    qty50 -= money.Quantity50;
+                    //    qty100 -= money.Quantity100;
+                    //    tresor += money.Amount;
+                    //}
+                }
 
                 string[] itemValues = new string[] 
                 {

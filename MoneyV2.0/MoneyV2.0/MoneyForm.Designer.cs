@@ -30,7 +30,6 @@ namespace MoneyV2._0
         /// </summary>
         private void InitializeComponent()
         {
-            this.AddCategoryBtn = new System.Windows.Forms.Button();
             this.OutcomeAmount = new System.Windows.Forms.Label();
             this.NoteLabel = new System.Windows.Forms.Label();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
@@ -39,7 +38,7 @@ namespace MoneyV2._0
             this.CategoryLabel = new System.Windows.Forms.Label();
             this.AimLabel = new System.Windows.Forms.Label();
             this.NoteTextBox = new System.Windows.Forms.RichTextBox();
-            this.OutcomeFormOKBtn = new System.Windows.Forms.Button();
+            this.MoneyFormSaveBtn = new System.Windows.Forms.Button();
             this.Qty100TB = new System.Windows.Forms.TextBox();
             this.Qty50TB = new System.Windows.Forms.TextBox();
             this.Qty20TB = new System.Windows.Forms.TextBox();
@@ -57,18 +56,6 @@ namespace MoneyV2._0
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // AddCategoryBtn
-            // 
-            this.AddCategoryBtn.BackColor = System.Drawing.Color.PaleGreen;
-            this.AddCategoryBtn.Location = new System.Drawing.Point(482, 144);
-            this.AddCategoryBtn.Name = "AddCategoryBtn";
-            this.AddCategoryBtn.Size = new System.Drawing.Size(101, 41);
-            this.AddCategoryBtn.TabIndex = 1;
-            this.AddCategoryBtn.TabStop = false;
-            this.AddCategoryBtn.Text = "Нова крайна цел";
-            this.AddCategoryBtn.UseVisualStyleBackColor = false;
-            this.AddCategoryBtn.Click += new System.EventHandler(this.AddOutcomeSourceBtn_Click);
             // 
             // OutcomeAmount
             // 
@@ -146,16 +133,16 @@ namespace MoneyV2._0
             this.NoteTextBox.TabStop = false;
             this.NoteTextBox.Text = "";
             // 
-            // OutcomeFormOKBtn
+            // MoneyFormSaveBtn
             // 
-            this.OutcomeFormOKBtn.BackColor = System.Drawing.Color.LightSalmon;
-            this.OutcomeFormOKBtn.Location = new System.Drawing.Point(470, 322);
-            this.OutcomeFormOKBtn.Name = "OutcomeFormOKBtn";
-            this.OutcomeFormOKBtn.Size = new System.Drawing.Size(76, 54);
-            this.OutcomeFormOKBtn.TabIndex = 10;
-            this.OutcomeFormOKBtn.Text = "Запис";
-            this.OutcomeFormOKBtn.UseVisualStyleBackColor = false;
-            this.OutcomeFormOKBtn.Click += new System.EventHandler(this.OutcomeFormOKBtn_Click);
+            this.MoneyFormSaveBtn.BackColor = System.Drawing.Color.LightSalmon;
+            this.MoneyFormSaveBtn.Location = new System.Drawing.Point(470, 322);
+            this.MoneyFormSaveBtn.Name = "MoneyFormSaveBtn";
+            this.MoneyFormSaveBtn.Size = new System.Drawing.Size(76, 54);
+            this.MoneyFormSaveBtn.TabIndex = 10;
+            this.MoneyFormSaveBtn.Text = "Запис";
+            this.MoneyFormSaveBtn.UseVisualStyleBackColor = false;
+            this.MoneyFormSaveBtn.Click += new System.EventHandler(this.OutcomeFormOKBtn_Click);
             // 
             // Qty100TB
             // 
@@ -328,7 +315,7 @@ namespace MoneyV2._0
             this.Controls.Add(this.Qty20TB);
             this.Controls.Add(this.Qty50TB);
             this.Controls.Add(this.Qty100TB);
-            this.Controls.Add(this.OutcomeFormOKBtn);
+            this.Controls.Add(this.MoneyFormSaveBtn);
             this.Controls.Add(this.NoteTextBox);
             this.Controls.Add(this.AimLabel);
             this.Controls.Add(this.CategoryLabel);
@@ -337,7 +324,6 @@ namespace MoneyV2._0
             this.Controls.Add(this.CategoryComboBox);
             this.Controls.Add(this.NoteLabel);
             this.Controls.Add(this.OutcomeAmount);
-            this.Controls.Add(this.AddCategoryBtn);
             this.Name = "MoneyForm";
             this.Text = "Пари";
             this.Load += new System.EventHandler(this.OutcomeForm_Load);
@@ -348,7 +334,6 @@ namespace MoneyV2._0
 
         #endregion
 
-        private System.Windows.Forms.Button AddCategoryBtn;
         private System.Windows.Forms.Label OutcomeAmount;
         private System.Windows.Forms.Label NoteLabel;
         private System.Windows.Forms.ComboBox CategoryComboBox;
@@ -357,7 +342,7 @@ namespace MoneyV2._0
         private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.Label AimLabel;
         private System.Windows.Forms.RichTextBox NoteTextBox;
-        private System.Windows.Forms.Button OutcomeFormOKBtn;
+        private System.Windows.Forms.Button MoneyFormSaveBtn;
         public bool areComboBoxesEmpty = true;
         public ITranferData parent;
         private System.Windows.Forms.TextBox Qty100TB;

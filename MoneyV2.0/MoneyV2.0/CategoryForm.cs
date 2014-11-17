@@ -35,9 +35,7 @@ namespace MoneyV2._0
             else
             {
                 parent.isNewMoneyCategoryIncome = false;
-            }
-            parent.ReloadData();
-            
+            }            
             this.Close();
         }
 
