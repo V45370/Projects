@@ -55,7 +55,7 @@ namespace MoneyV2._0
                 //if selected control is CategoryComboBox
                 if (this.ActiveControl.Name == this.CategoryComboBox.Name)
                 {
-                    //MessageBox.Show(CategoryComboBox.Text);
+                    
                     foreach (var category in CategoryComboBox.Items)
                     {
                         if (category.ToString().Equals(CategoryComboBox.Text))
@@ -63,7 +63,7 @@ namespace MoneyV2._0
                             existingCategoryValue = true;
                         }
                     }
-                    //MessageBox.Show(existingCategoryValue.ToString());
+                    
                     if (existingCategoryValue == false)
                     {
                         var CategoryForm = new CategoryForm(this);
