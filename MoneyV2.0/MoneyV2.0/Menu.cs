@@ -24,7 +24,8 @@ namespace MoneyV2._0
         private void OpenMoneyFormBtn_Click(object sender, EventArgs e)
         {
             var moneyForm = new MoneyForm();
-            moneyForm.Show();
+            moneyForm.ShowDialog();
+            ReloadData();
         }
 
         public void ReloadData()
@@ -33,7 +34,7 @@ namespace MoneyV2._0
             {
                 CashDeskListView.Items.RemoveAt(0);
             }
-            using (var db = new DatabaseContext())
+            using (var db = new MoneyContext())
             {
                 var moneys = db.Money.ToList();
                 double tresor = 0;
@@ -48,8 +49,8 @@ namespace MoneyV2._0
                 foreach (var money in moneys)
                 {
 
-                    //if (money.Category.isIncome == true)
-                    //{
+                    if (money.Category.isIncome == true)
+                    {
                         qty1 += money.Quantity1;
                         qty2 += money.Quantity2;
                         qty5 += money.Quantity5;
@@ -58,18 +59,18 @@ namespace MoneyV2._0
                         qty50 += money.Quantity50;
                         qty100 += money.Quantity100;
                         tresor += money.Amount;
-                    //}
-                    //else
-                    //{
-                    //    qty1 -= money.Quantity1;
-                    //    qty2 -= money.Quantity2;
-                    //    qty5 -= money.Quantity5;
-                    //    qty10 -= money.Quantity10;
-                    //    qty20 -= money.Quantity20;
-                    //    qty50 -= money.Quantity50;
-                    //    qty100 -= money.Quantity100;
-                    //    tresor += money.Amount;
-                    //}
+                    }
+                    else
+                    {
+                        qty1 -= money.Quantity1;
+                        qty2 -= money.Quantity2;
+                        qty5 -= money.Quantity5;
+                        qty10 -= money.Quantity10;
+                        qty20 -= money.Quantity20;
+                        qty50 -= money.Quantity50;
+                        qty100 -= money.Quantity100;
+                        tresor -= money.Amount;
+                    }
                 }
 
                 string[] itemValues = new string[] 
@@ -87,6 +88,13 @@ namespace MoneyV2._0
             }
         }
         private void Menu_Load(object sender, EventArgs e)
+        {
+            var today = DateTime.Today;
+            MessageBox.Show(today.ToString());
+            ListViewAdjustments();            
+            ReloadData();
+        }
+        private void ListViewAdjustments()
         {
             //nastroivane na listview
             ColumnHeader headerQty1 = new ColumnHeader();
@@ -137,7 +145,6 @@ namespace MoneyV2._0
             headerCashDesk.Width = 100;
             headerCashDesk.TextAlign = HorizontalAlignment.Center;
             this.CashDeskListView.Columns.Add(headerCashDesk);
-            ReloadData();
         }
     }
 }

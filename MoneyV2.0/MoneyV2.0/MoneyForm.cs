@@ -10,7 +10,7 @@ namespace MoneyV2._0
 {
     public partial class MoneyForm : Form
     {
-        public bool isNewMoneyCategoryIncome = false;
+        public bool isNewMoneyCategoryIncome = false; // used in CategoryForm when picking
         private bool isCategorySelectedIncome = false;
         private bool existingCategoryValue = false;
         private bool existingAimValue = false;
@@ -29,7 +29,7 @@ namespace MoneyV2._0
 
         private void SumAllBanknotiOnTextChanged()
         {
-            this.OutcomeAmountTB.Text = (int.Parse(Qty100TB.Text) * 100
+            this.AmountTB.Text = (int.Parse(Qty100TB.Text) * 100
                 + int.Parse(Qty50TB.Text) * 50
                 + int.Parse(Qty20TB.Text) * 20
                 + int.Parse(Qty10TB.Text) * 10
@@ -146,10 +146,9 @@ namespace MoneyV2._0
                 
         }
 
-
-
-        private void OutcomeForm_Load(object sender, EventArgs e)
+        private void ComboboxesAdjustements()
         {
+
             this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             this.CategoryComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.CategoryComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -157,9 +156,12 @@ namespace MoneyV2._0
             this.AimComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             this.AimComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.AimComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-
             
+        }
 
+        private void MoneyForm_Load(object sender, EventArgs e)
+        {
+            ComboboxesAdjustements();
             using (var db = new DatabaseContext())
             {
                 var categoryList = new List<string>();
@@ -169,24 +171,6 @@ namespace MoneyV2._0
                     categoryList.Add(category.CategoryName);
                 }
                 this.CategoryComboBox.DataSource = categoryList;
-                //isCategorySelectedIncome = from a in db.Categories
-                //                           from b in db.Money
-                //                           where a.CategoryId=b.
-                //                           select a.isIncome;
-
-            }
-
-            if (notFromOfis)
-            {
-                Qty100TB.ReadOnly = true;
-                Qty50TB.ReadOnly = true;
-                Qty20TB.ReadOnly = true;
-                Qty10TB.ReadOnly = true;
-                Qty5TB.ReadOnly = true;
-                Qty2TB.ReadOnly = true;
-                Qty1TB.ReadOnly = true;
-                OutcomeAmountTB.ReadOnly = false;
-                dateTimePicker.Enabled = false;
             }
             ReloadData();
             
@@ -214,14 +198,7 @@ namespace MoneyV2._0
             
             using (var db = new DatabaseContext())
             {
-                //Reload Source ComboBox
-                //var sourceList = new List<string>();
-                //var sources = db.Sources;
-                //foreach (var source in sources)
-                //{
-                //    sourceList.Add(source.SourceName);
-                //}
-                //this.SourceCB.DataSource = sourceList;
+                
                 //Reload Category ComboBox
                 var categoryList = new List<string>();
                 var categories = db.Categories;
@@ -239,29 +216,16 @@ namespace MoneyV2._0
 
                 var aimslist = aims.ToList<string>();
                 AimComboBox.DataSource = aimslist;
-                //if (aimList.Count == 0 || categoryList.Count == 0)
-                //{
-                //    areComboBoxesEmpty = true;                    
-                //}
-            }
-        }
-        private void AddOutcomeSourceBtn_Click(object sender, EventArgs e)
-        {
-            var outcomeAimForm = new CategoryForm(this);
-            outcomeAimForm.Show();
-            if (!areComboBoxesEmpty)
-            {
-                ReloadData();
             }
         }
 
-        private void OutcomeFormOKBtn_Click(object sender, EventArgs e)
+        private void MoneyFormSaveBtn_Click(object sender, EventArgs e)
         {
             using(var db = new DatabaseContext())
             {
                 var money = new Money();
-                money.Amount = double.Parse(this.OutcomeAmountTB.Text);
-                money.Date = dateTimePicker.Value;
+                money.Amount = double.Parse(this.AmountTB.Text);
+                money.Date = dateTimePicker.Value.Date;
                 money.Note = NoteTextBox.Text;
                 money.Quantity1 = int.Parse(Qty1TB.Text);
                 money.Quantity2 = int.Parse(Qty2TB.Text);
@@ -280,115 +244,16 @@ namespace MoneyV2._0
                 
                 db.Money.Add(money);
                 db.SaveChanges();
-
-                //string[] transfer = new string[2];
-                //transfer[0] = this.AimComboBox.SelectedValue.ToString();
-                //transfer[1] = this.OutcomeAmountTB.Text;
-                //parent.GiveParentOutcomeSaved(transfer);
             }
             this.Close();
         }
-
-        private void OutcomeAmountTB_TextChanged(object sender, EventArgs e)
+        private void OnTextChanged(object sender, EventArgs e)
         {
+            TextBox textBox = (TextBox)sender;
             double a;
-            if (!double.TryParse(OutcomeAmountTB.Text, out a))
+            if (!double.TryParse(textBox.Text, out a))
             {
-                OutcomeAmountTB.Text = "0";
-                MessageBox.Show("Моля въведете валидно число.");
-            }
-        }
-
-        private void Qty100TB_TextChanged(object sender, EventArgs e)
-        {
-            int a;
-            if (!int.TryParse(Qty100TB.Text, out a))
-            {
-                Qty100TB.Text = "0";
-                MessageBox.Show("Моля въведете валидно число.");
-            }
-            else
-            {
-                SumAllBanknotiOnTextChanged();
-            }
-        }
-
-        private void Qty50TB_TextChanged(object sender, EventArgs e)
-        {
-            int a;            
-            if (!int.TryParse(Qty50TB.Text, out a))
-            {
-                Qty50TB.Text = "0";
-                MessageBox.Show("Моля въведете валидно число.");
-            }
-            else
-            {
-                SumAllBanknotiOnTextChanged();
-            }
-        }
-
-        private void Qty20TB_TextChanged(object sender, EventArgs e)
-        {
-            int a;
-            if (!int.TryParse(Qty20TB.Text, out a))
-            {
-                Qty20TB.Text = "0";
-                MessageBox.Show("Моля въведете валидно число.");
-            }
-            else
-            {
-                SumAllBanknotiOnTextChanged();
-            }
-        }
-
-        private void Qty10TB_TextChanged(object sender, EventArgs e)
-        {
-            int a;
-            if (!int.TryParse(Qty10TB.Text, out a))
-            {
-                Qty10TB.Text = "0";
-                MessageBox.Show("Моля въведете валидно число.");
-            }
-            else
-            {
-                SumAllBanknotiOnTextChanged();
-            }
-        }
-
-        private void Qty5TB_TextChanged(object sender, EventArgs e)
-        {
-            int a;
-            if (!int.TryParse(Qty5TB.Text, out a))
-            {
-                Qty5TB.Text = "0";
-                MessageBox.Show("Моля въведете валидно число.");
-            }
-            else
-            {
-                SumAllBanknotiOnTextChanged();
-            }
-        }
-
-        private void Qty2TB_TextChanged(object sender, EventArgs e)
-        {
-            int a;
-            if (!int.TryParse(Qty2TB.Text, out a))
-            {
-                Qty2TB.Text = "0";
-                MessageBox.Show("Моля въведете валидно число.");
-            }
-            else
-            {
-                SumAllBanknotiOnTextChanged();
-            }
-        }
-
-        private void Qty1TB_TextChanged(object sender, EventArgs e)
-        {
-            int a;
-            if (!int.TryParse(Qty1TB.Text, out a))
-            {
-                Qty1TB.Text = "0";
+                textBox.Text = "0";
                 MessageBox.Show("Моля въведете валидно число.");
             }
             else

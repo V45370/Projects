@@ -34,7 +34,7 @@ namespace MoneyV2._0
             this.NoteLabel = new System.Windows.Forms.Label();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.AimComboBox = new System.Windows.Forms.ComboBox();
-            this.OutcomeAmountTB = new System.Windows.Forms.TextBox();
+            this.AmountTB = new System.Windows.Forms.TextBox();
             this.CategoryLabel = new System.Windows.Forms.Label();
             this.AimLabel = new System.Windows.Forms.Label();
             this.NoteTextBox = new System.Windows.Forms.RichTextBox();
@@ -94,17 +94,17 @@ namespace MoneyV2._0
             this.AimComboBox.TabIndex = 9;
             this.AimComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
-            // OutcomeAmountTB
+            // AmountTB
             // 
-            this.OutcomeAmountTB.Location = new System.Drawing.Point(91, 253);
-            this.OutcomeAmountTB.Name = "OutcomeAmountTB";
-            this.OutcomeAmountTB.ReadOnly = true;
-            this.OutcomeAmountTB.Size = new System.Drawing.Size(100, 20);
-            this.OutcomeAmountTB.TabIndex = 6;
-            this.OutcomeAmountTB.TabStop = false;
-            this.OutcomeAmountTB.Text = "0";
-            this.OutcomeAmountTB.TextChanged += new System.EventHandler(this.OutcomeAmountTB_TextChanged);
-            this.OutcomeAmountTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.AmountTB.Location = new System.Drawing.Point(91, 253);
+            this.AmountTB.Name = "AmountTB";
+            this.AmountTB.ReadOnly = true;
+            this.AmountTB.Size = new System.Drawing.Size(100, 20);
+            this.AmountTB.TabIndex = 6;
+            this.AmountTB.TabStop = false;
+            this.AmountTB.Text = "0";
+            this.AmountTB.TextChanged += new System.EventHandler(this.OnTextChanged);
+            this.AmountTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // CategoryLabel
             // 
@@ -142,7 +142,7 @@ namespace MoneyV2._0
             this.MoneyFormSaveBtn.TabIndex = 10;
             this.MoneyFormSaveBtn.Text = "Запис";
             this.MoneyFormSaveBtn.UseVisualStyleBackColor = false;
-            this.MoneyFormSaveBtn.Click += new System.EventHandler(this.OutcomeFormOKBtn_Click);
+            this.MoneyFormSaveBtn.Click += new System.EventHandler(this.MoneyFormSaveBtn_Click);
             // 
             // Qty100TB
             // 
@@ -151,7 +151,7 @@ namespace MoneyV2._0
             this.Qty100TB.Size = new System.Drawing.Size(75, 20);
             this.Qty100TB.TabIndex = 0;
             this.Qty100TB.Text = "0";
-            this.Qty100TB.TextChanged += new System.EventHandler(this.Qty100TB_TextChanged);
+            this.Qty100TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty100TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty50TB
@@ -161,7 +161,7 @@ namespace MoneyV2._0
             this.Qty50TB.Size = new System.Drawing.Size(75, 20);
             this.Qty50TB.TabIndex = 1;
             this.Qty50TB.Text = "0";
-            this.Qty50TB.TextChanged += new System.EventHandler(this.Qty50TB_TextChanged);
+            this.Qty50TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty50TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty20TB
@@ -171,7 +171,7 @@ namespace MoneyV2._0
             this.Qty20TB.Size = new System.Drawing.Size(75, 20);
             this.Qty20TB.TabIndex = 2;
             this.Qty20TB.Text = "0";
-            this.Qty20TB.TextChanged += new System.EventHandler(this.Qty20TB_TextChanged);
+            this.Qty20TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty20TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty10TB
@@ -181,7 +181,7 @@ namespace MoneyV2._0
             this.Qty10TB.Size = new System.Drawing.Size(75, 20);
             this.Qty10TB.TabIndex = 3;
             this.Qty10TB.Text = "0";
-            this.Qty10TB.TextChanged += new System.EventHandler(this.Qty10TB_TextChanged);
+            this.Qty10TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty10TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty5TB
@@ -191,7 +191,7 @@ namespace MoneyV2._0
             this.Qty5TB.Size = new System.Drawing.Size(75, 20);
             this.Qty5TB.TabIndex = 4;
             this.Qty5TB.Text = "0";
-            this.Qty5TB.TextChanged += new System.EventHandler(this.Qty5TB_TextChanged);
+            this.Qty5TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty5TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty2TB
@@ -201,7 +201,7 @@ namespace MoneyV2._0
             this.Qty2TB.Size = new System.Drawing.Size(75, 20);
             this.Qty2TB.TabIndex = 5;
             this.Qty2TB.Text = "0";
-            this.Qty2TB.TextChanged += new System.EventHandler(this.Qty2TB_TextChanged);
+            this.Qty2TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty2TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty1TB
@@ -211,7 +211,7 @@ namespace MoneyV2._0
             this.Qty1TB.Size = new System.Drawing.Size(75, 20);
             this.Qty1TB.TabIndex = 6;
             this.Qty1TB.Text = "0";
-            this.Qty1TB.TextChanged += new System.EventHandler(this.Qty1TB_TextChanged);
+            this.Qty1TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty1TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty100Label
@@ -319,14 +319,14 @@ namespace MoneyV2._0
             this.Controls.Add(this.NoteTextBox);
             this.Controls.Add(this.AimLabel);
             this.Controls.Add(this.CategoryLabel);
-            this.Controls.Add(this.OutcomeAmountTB);
+            this.Controls.Add(this.AmountTB);
             this.Controls.Add(this.AimComboBox);
             this.Controls.Add(this.CategoryComboBox);
             this.Controls.Add(this.NoteLabel);
             this.Controls.Add(this.OutcomeAmount);
             this.Name = "MoneyForm";
             this.Text = "Пари";
-            this.Load += new System.EventHandler(this.OutcomeForm_Load);
+            this.Load += new System.EventHandler(this.MoneyForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,7 +338,7 @@ namespace MoneyV2._0
         private System.Windows.Forms.Label NoteLabel;
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.ComboBox AimComboBox;
-        private System.Windows.Forms.TextBox OutcomeAmountTB;
+        private System.Windows.Forms.TextBox AmountTB;
         private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.Label AimLabel;
         private System.Windows.Forms.RichTextBox NoteTextBox;
