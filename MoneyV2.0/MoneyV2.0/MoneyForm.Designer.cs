@@ -62,7 +62,7 @@ namespace MoneyV2._0
             // AmountLabel
             // 
             this.AmountLabel.AutoSize = true;
-            this.AmountLabel.Location = new System.Drawing.Point(369, 234);
+            this.AmountLabel.Location = new System.Drawing.Point(348, 228);
             this.AmountLabel.Name = "AmountLabel";
             this.AmountLabel.Size = new System.Drawing.Size(39, 13);
             this.AmountLabel.TabIndex = 2;
@@ -71,7 +71,7 @@ namespace MoneyV2._0
             // NoteLabel
             // 
             this.NoteLabel.AutoSize = true;
-            this.NoteLabel.Location = new System.Drawing.Point(70, 151);
+            this.NoteLabel.Location = new System.Drawing.Point(43, 194);
             this.NoteLabel.Name = "NoteLabel";
             this.NoteLabel.Size = new System.Drawing.Size(70, 13);
             this.NoteLabel.TabIndex = 3;
@@ -83,26 +83,26 @@ namespace MoneyV2._0
             this.CategoryComboBox.Location = new System.Drawing.Point(108, 31);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(121, 21);
-            this.CategoryComboBox.TabIndex = 8;
+            this.CategoryComboBox.TabIndex = 0;
             this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             this.CategoryComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // AimComboBox
             // 
             this.AimComboBox.FormattingEnabled = true;
-            this.AimComboBox.Location = new System.Drawing.Point(108, 69);
+            this.AimComboBox.Location = new System.Drawing.Point(108, 81);
             this.AimComboBox.Name = "AimComboBox";
             this.AimComboBox.Size = new System.Drawing.Size(121, 21);
-            this.AimComboBox.TabIndex = 9;
+            this.AimComboBox.TabIndex = 1;
             this.AimComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // AmountTB
             // 
-            this.AmountTB.Location = new System.Drawing.Point(414, 231);
+            this.AmountTB.Location = new System.Drawing.Point(415, 225);
             this.AmountTB.Name = "AmountTB";
             this.AmountTB.ReadOnly = true;
-            this.AmountTB.Size = new System.Drawing.Size(100, 20);
-            this.AmountTB.TabIndex = 6;
+            this.AmountTB.Size = new System.Drawing.Size(76, 20);
+            this.AmountTB.TabIndex = 10;
             this.AmountTB.TabStop = false;
             this.AmountTB.Text = "0";
             this.AmountTB.TextChanged += new System.EventHandler(this.OnTextChanged);
@@ -111,7 +111,7 @@ namespace MoneyV2._0
             // CategoryLabel
             // 
             this.CategoryLabel.AutoSize = true;
-            this.CategoryLabel.Location = new System.Drawing.Point(70, 34);
+            this.CategoryLabel.Location = new System.Drawing.Point(45, 34);
             this.CategoryLabel.Name = "CategoryLabel";
             this.CategoryLabel.Size = new System.Drawing.Size(32, 13);
             this.CategoryLabel.TabIndex = 8;
@@ -120,98 +120,98 @@ namespace MoneyV2._0
             // AimLabel
             // 
             this.AimLabel.AutoSize = true;
-            this.AimLabel.Location = new System.Drawing.Point(31, 72);
+            this.AimLabel.Location = new System.Drawing.Point(44, 84);
             this.AimLabel.Name = "AimLabel";
-            this.AimLabel.Size = new System.Drawing.Size(71, 13);
+            this.AimLabel.Size = new System.Drawing.Size(33, 13);
             this.AimLabel.TabIndex = 9;
-            this.AimLabel.Text = "Крайна цел :";
+            this.AimLabel.Text = "Цел :";
             // 
             // NoteTextBox
             // 
-            this.NoteTextBox.Location = new System.Drawing.Point(73, 167);
+            this.NoteTextBox.Location = new System.Drawing.Point(47, 210);
             this.NoteTextBox.Name = "NoteTextBox";
-            this.NoteTextBox.Size = new System.Drawing.Size(228, 92);
-            this.NoteTextBox.TabIndex = 10;
+            this.NoteTextBox.Size = new System.Drawing.Size(249, 128);
+            this.NoteTextBox.TabIndex = 50;
             this.NoteTextBox.TabStop = false;
             this.NoteTextBox.Text = "";
             // 
             // MoneyFormSaveBtn
             // 
             this.MoneyFormSaveBtn.BackColor = System.Drawing.Color.LightSalmon;
-            this.MoneyFormSaveBtn.Location = new System.Drawing.Point(438, 293);
+            this.MoneyFormSaveBtn.Location = new System.Drawing.Point(409, 284);
             this.MoneyFormSaveBtn.Name = "MoneyFormSaveBtn";
             this.MoneyFormSaveBtn.Size = new System.Drawing.Size(76, 54);
-            this.MoneyFormSaveBtn.TabIndex = 10;
+            this.MoneyFormSaveBtn.TabIndex = 11;
             this.MoneyFormSaveBtn.Text = "Запис";
             this.MoneyFormSaveBtn.UseVisualStyleBackColor = false;
             this.MoneyFormSaveBtn.Click += new System.EventHandler(this.MoneyFormSaveBtn_Click);
             // 
             // Qty100TB
             // 
-            this.Qty100TB.Location = new System.Drawing.Point(414, 32);
+            this.Qty100TB.Location = new System.Drawing.Point(417, 30);
             this.Qty100TB.Name = "Qty100TB";
-            this.Qty100TB.Size = new System.Drawing.Size(75, 20);
-            this.Qty100TB.TabIndex = 0;
+            this.Qty100TB.Size = new System.Drawing.Size(35, 20);
+            this.Qty100TB.TabIndex = 3;
             this.Qty100TB.Text = "0";
             this.Qty100TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty100TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty50TB
             // 
-            this.Qty50TB.Location = new System.Drawing.Point(414, 59);
+            this.Qty50TB.Location = new System.Drawing.Point(417, 57);
             this.Qty50TB.Name = "Qty50TB";
-            this.Qty50TB.Size = new System.Drawing.Size(75, 20);
-            this.Qty50TB.TabIndex = 1;
+            this.Qty50TB.Size = new System.Drawing.Size(35, 20);
+            this.Qty50TB.TabIndex = 4;
             this.Qty50TB.Text = "0";
             this.Qty50TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty50TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty20TB
             // 
-            this.Qty20TB.Location = new System.Drawing.Point(414, 86);
+            this.Qty20TB.Location = new System.Drawing.Point(417, 84);
             this.Qty20TB.Name = "Qty20TB";
-            this.Qty20TB.Size = new System.Drawing.Size(75, 20);
-            this.Qty20TB.TabIndex = 2;
+            this.Qty20TB.Size = new System.Drawing.Size(35, 20);
+            this.Qty20TB.TabIndex = 5;
             this.Qty20TB.Text = "0";
             this.Qty20TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty20TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty10TB
             // 
-            this.Qty10TB.Location = new System.Drawing.Point(414, 112);
+            this.Qty10TB.Location = new System.Drawing.Point(417, 110);
             this.Qty10TB.Name = "Qty10TB";
-            this.Qty10TB.Size = new System.Drawing.Size(75, 20);
-            this.Qty10TB.TabIndex = 3;
+            this.Qty10TB.Size = new System.Drawing.Size(35, 20);
+            this.Qty10TB.TabIndex = 6;
             this.Qty10TB.Text = "0";
             this.Qty10TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty10TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty5TB
             // 
-            this.Qty5TB.Location = new System.Drawing.Point(414, 138);
+            this.Qty5TB.Location = new System.Drawing.Point(417, 136);
             this.Qty5TB.Name = "Qty5TB";
-            this.Qty5TB.Size = new System.Drawing.Size(75, 20);
-            this.Qty5TB.TabIndex = 4;
+            this.Qty5TB.Size = new System.Drawing.Size(35, 20);
+            this.Qty5TB.TabIndex = 7;
             this.Qty5TB.Text = "0";
             this.Qty5TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty5TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty2TB
             // 
-            this.Qty2TB.Location = new System.Drawing.Point(414, 164);
+            this.Qty2TB.Location = new System.Drawing.Point(417, 162);
             this.Qty2TB.Name = "Qty2TB";
-            this.Qty2TB.Size = new System.Drawing.Size(75, 20);
-            this.Qty2TB.TabIndex = 5;
+            this.Qty2TB.Size = new System.Drawing.Size(35, 20);
+            this.Qty2TB.TabIndex = 8;
             this.Qty2TB.Text = "0";
             this.Qty2TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty2TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // Qty1TB
             // 
-            this.Qty1TB.Location = new System.Drawing.Point(414, 190);
+            this.Qty1TB.Location = new System.Drawing.Point(417, 188);
             this.Qty1TB.Name = "Qty1TB";
-            this.Qty1TB.Size = new System.Drawing.Size(75, 20);
-            this.Qty1TB.TabIndex = 6;
+            this.Qty1TB.Size = new System.Drawing.Size(35, 20);
+            this.Qty1TB.TabIndex = 9;
             this.Qty1TB.Text = "0";
             this.Qty1TB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.Qty1TB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
@@ -219,7 +219,7 @@ namespace MoneyV2._0
             // Qty100Label
             // 
             this.Qty100Label.AutoSize = true;
-            this.Qty100Label.Location = new System.Drawing.Point(495, 37);
+            this.Qty100Label.Location = new System.Drawing.Point(458, 35);
             this.Qty100Label.Name = "Qty100Label";
             this.Qty100Label.Size = new System.Drawing.Size(33, 13);
             this.Qty100Label.TabIndex = 22;
@@ -228,7 +228,7 @@ namespace MoneyV2._0
             // Qty50Label
             // 
             this.Qty50Label.AutoSize = true;
-            this.Qty50Label.Location = new System.Drawing.Point(495, 62);
+            this.Qty50Label.Location = new System.Drawing.Point(458, 60);
             this.Qty50Label.Name = "Qty50Label";
             this.Qty50Label.Size = new System.Drawing.Size(27, 13);
             this.Qty50Label.TabIndex = 23;
@@ -237,7 +237,7 @@ namespace MoneyV2._0
             // Qty20Label
             // 
             this.Qty20Label.AutoSize = true;
-            this.Qty20Label.Location = new System.Drawing.Point(495, 89);
+            this.Qty20Label.Location = new System.Drawing.Point(458, 87);
             this.Qty20Label.Name = "Qty20Label";
             this.Qty20Label.Size = new System.Drawing.Size(27, 13);
             this.Qty20Label.TabIndex = 24;
@@ -246,7 +246,7 @@ namespace MoneyV2._0
             // Qty10Label
             // 
             this.Qty10Label.AutoSize = true;
-            this.Qty10Label.Location = new System.Drawing.Point(495, 115);
+            this.Qty10Label.Location = new System.Drawing.Point(458, 113);
             this.Qty10Label.Name = "Qty10Label";
             this.Qty10Label.Size = new System.Drawing.Size(27, 13);
             this.Qty10Label.TabIndex = 25;
@@ -255,7 +255,7 @@ namespace MoneyV2._0
             // Qty5Label
             // 
             this.Qty5Label.AutoSize = true;
-            this.Qty5Label.Location = new System.Drawing.Point(495, 141);
+            this.Qty5Label.Location = new System.Drawing.Point(458, 139);
             this.Qty5Label.Name = "Qty5Label";
             this.Qty5Label.Size = new System.Drawing.Size(21, 13);
             this.Qty5Label.TabIndex = 26;
@@ -264,7 +264,7 @@ namespace MoneyV2._0
             // Qty2Label
             // 
             this.Qty2Label.AutoSize = true;
-            this.Qty2Label.Location = new System.Drawing.Point(495, 167);
+            this.Qty2Label.Location = new System.Drawing.Point(458, 165);
             this.Qty2Label.Name = "Qty2Label";
             this.Qty2Label.Size = new System.Drawing.Size(21, 13);
             this.Qty2Label.TabIndex = 27;
@@ -273,7 +273,7 @@ namespace MoneyV2._0
             // Qty1Label
             // 
             this.Qty1Label.AutoSize = true;
-            this.Qty1Label.Location = new System.Drawing.Point(495, 193);
+            this.Qty1Label.Location = new System.Drawing.Point(458, 191);
             this.Qty1Label.Name = "Qty1Label";
             this.Qty1Label.Size = new System.Drawing.Size(21, 13);
             this.Qty1Label.TabIndex = 28;
@@ -281,17 +281,17 @@ namespace MoneyV2._0
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(108, 112);
+            this.dateTimePicker.Location = new System.Drawing.Point(108, 134);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(156, 20);
-            this.dateTimePicker.TabIndex = 8;
+            this.dateTimePicker.TabIndex = 20;
             this.dateTimePicker.TabStop = false;
             // 
             // NextDateBtn
             // 
             this.NextDateBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("NextDateBtn.BackgroundImage")));
             this.NextDateBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.NextDateBtn.Location = new System.Drawing.Point(270, 107);
+            this.NextDateBtn.Location = new System.Drawing.Point(270, 129);
             this.NextDateBtn.Name = "NextDateBtn";
             this.NextDateBtn.Size = new System.Drawing.Size(30, 31);
             this.NextDateBtn.TabIndex = 32;
@@ -302,7 +302,7 @@ namespace MoneyV2._0
             // 
             this.PreviusDateBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PreviusDateBtn.BackgroundImage")));
             this.PreviusDateBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PreviusDateBtn.Location = new System.Drawing.Point(72, 107);
+            this.PreviusDateBtn.Location = new System.Drawing.Point(72, 129);
             this.PreviusDateBtn.Name = "PreviusDateBtn";
             this.PreviusDateBtn.Size = new System.Drawing.Size(30, 31);
             this.PreviusDateBtn.TabIndex = 33;
@@ -313,7 +313,7 @@ namespace MoneyV2._0
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 395);
+            this.ClientSize = new System.Drawing.Size(548, 376);
             this.Controls.Add(this.PreviusDateBtn);
             this.Controls.Add(this.NextDateBtn);
             this.Controls.Add(this.dateTimePicker);

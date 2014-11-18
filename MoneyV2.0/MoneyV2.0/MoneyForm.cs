@@ -193,29 +193,50 @@ namespace MoneyV2._0
         {
             if (isCurrentCategoryIncome)
             {
-                Qty100TB.ReadOnly = false;
-                Qty50TB.ReadOnly = false;
-                Qty20TB.ReadOnly = false;
-                Qty10TB.ReadOnly = false;
-                Qty5TB.ReadOnly = false;
-                Qty2TB.ReadOnly = false;
-                Qty1TB.ReadOnly = false;
+                AimLabel.Text = "Източник: ";
+                Qty100TB.Show();
+                Qty50TB.Show();
+                Qty20TB.Show();
+                Qty10TB.Show();
+                Qty5TB.Show();
+                Qty2TB.Show();
+                Qty1TB.Show();
+                Qty100Label.Show();
+                Qty50Label.Show();
+                Qty20Label.Show();
+                Qty10Label.Show();
+                Qty5Label.Show();
+                Qty2Label.Show();
+                Qty1Label.Show();
                 AmountTB.ReadOnly = true;
-                AmountLabel.Text = "Приходна сума";
+
+                AmountTB.TabIndex = 10;
+
+                AmountLabel.Text = "Приход: ";
                 CategoryComboBox.BackColor = Color.PaleGreen;
             }
             else
             {
-                Qty100TB.ReadOnly = true;
-                Qty50TB.ReadOnly = true;
-                Qty20TB.ReadOnly = true;
-                Qty10TB.ReadOnly = true;
-                Qty5TB.ReadOnly = true;
-                Qty2TB.ReadOnly = true;
-                Qty1TB.ReadOnly = true;
+                AimLabel.Text = "Цел: ";
+                Qty100TB.Hide();
+                Qty50TB.Hide();
+                Qty20TB.Hide();
+                Qty10TB.Hide();
+                Qty5TB.Hide();
+                Qty2TB.Hide();
+                Qty1TB.Hide();
+                Qty100Label.Hide();
+                Qty50Label.Hide();
+                Qty20Label.Hide();
+                Qty10Label.Hide();
+                Qty5Label.Hide();
+                Qty2Label.Hide();
+                Qty1Label.Hide();
                 AmountTB.ReadOnly = false;
 
-                AmountLabel.Text = "Разходна сума";
+                AmountTB.TabIndex = 2;
+
+                AmountLabel.Text = "Разход: ";
                 CategoryComboBox.BackColor = Color.LightSalmon;
             }
                 
