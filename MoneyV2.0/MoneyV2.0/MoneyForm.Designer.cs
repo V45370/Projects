@@ -30,7 +30,8 @@ namespace MoneyV2._0
         /// </summary>
         private void InitializeComponent()
         {
-            this.OutcomeAmount = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoneyForm));
+            this.AmountLabel = new System.Windows.Forms.Label();
             this.NoteLabel = new System.Windows.Forms.Label();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.AimComboBox = new System.Windows.Forms.ComboBox();
@@ -54,22 +55,23 @@ namespace MoneyV2._0
             this.Qty2Label = new System.Windows.Forms.Label();
             this.Qty1Label = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerLabel = new System.Windows.Forms.Label();
+            this.NextDateBtn = new System.Windows.Forms.Button();
+            this.PreviusDateBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // OutcomeAmount
+            // AmountLabel
             // 
-            this.OutcomeAmount.AutoSize = true;
-            this.OutcomeAmount.Location = new System.Drawing.Point(88, 237);
-            this.OutcomeAmount.Name = "OutcomeAmount";
-            this.OutcomeAmount.Size = new System.Drawing.Size(89, 13);
-            this.OutcomeAmount.TabIndex = 2;
-            this.OutcomeAmount.Text = "Разходна сума :";
+            this.AmountLabel.AutoSize = true;
+            this.AmountLabel.Location = new System.Drawing.Point(369, 234);
+            this.AmountLabel.Name = "AmountLabel";
+            this.AmountLabel.Size = new System.Drawing.Size(39, 13);
+            this.AmountLabel.TabIndex = 2;
+            this.AmountLabel.Text = "Сума :";
             // 
             // NoteLabel
             // 
             this.NoteLabel.AutoSize = true;
-            this.NoteLabel.Location = new System.Drawing.Point(233, 224);
+            this.NoteLabel.Location = new System.Drawing.Point(70, 151);
             this.NoteLabel.Name = "NoteLabel";
             this.NoteLabel.Size = new System.Drawing.Size(70, 13);
             this.NoteLabel.TabIndex = 3;
@@ -78,7 +80,7 @@ namespace MoneyV2._0
             // CategoryComboBox
             // 
             this.CategoryComboBox.FormattingEnabled = true;
-            this.CategoryComboBox.Location = new System.Drawing.Point(309, 108);
+            this.CategoryComboBox.Location = new System.Drawing.Point(108, 31);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(121, 21);
             this.CategoryComboBox.TabIndex = 8;
@@ -88,7 +90,7 @@ namespace MoneyV2._0
             // AimComboBox
             // 
             this.AimComboBox.FormattingEnabled = true;
-            this.AimComboBox.Location = new System.Drawing.Point(309, 155);
+            this.AimComboBox.Location = new System.Drawing.Point(108, 69);
             this.AimComboBox.Name = "AimComboBox";
             this.AimComboBox.Size = new System.Drawing.Size(121, 21);
             this.AimComboBox.TabIndex = 9;
@@ -96,7 +98,7 @@ namespace MoneyV2._0
             // 
             // AmountTB
             // 
-            this.AmountTB.Location = new System.Drawing.Point(91, 253);
+            this.AmountTB.Location = new System.Drawing.Point(414, 231);
             this.AmountTB.Name = "AmountTB";
             this.AmountTB.ReadOnly = true;
             this.AmountTB.Size = new System.Drawing.Size(100, 20);
@@ -109,7 +111,7 @@ namespace MoneyV2._0
             // CategoryLabel
             // 
             this.CategoryLabel.AutoSize = true;
-            this.CategoryLabel.Location = new System.Drawing.Point(271, 111);
+            this.CategoryLabel.Location = new System.Drawing.Point(70, 34);
             this.CategoryLabel.Name = "CategoryLabel";
             this.CategoryLabel.Size = new System.Drawing.Size(32, 13);
             this.CategoryLabel.TabIndex = 8;
@@ -118,7 +120,7 @@ namespace MoneyV2._0
             // AimLabel
             // 
             this.AimLabel.AutoSize = true;
-            this.AimLabel.Location = new System.Drawing.Point(232, 158);
+            this.AimLabel.Location = new System.Drawing.Point(31, 72);
             this.AimLabel.Name = "AimLabel";
             this.AimLabel.Size = new System.Drawing.Size(71, 13);
             this.AimLabel.TabIndex = 9;
@@ -126,7 +128,7 @@ namespace MoneyV2._0
             // 
             // NoteTextBox
             // 
-            this.NoteTextBox.Location = new System.Drawing.Point(318, 224);
+            this.NoteTextBox.Location = new System.Drawing.Point(73, 167);
             this.NoteTextBox.Name = "NoteTextBox";
             this.NoteTextBox.Size = new System.Drawing.Size(228, 92);
             this.NoteTextBox.TabIndex = 10;
@@ -136,7 +138,7 @@ namespace MoneyV2._0
             // MoneyFormSaveBtn
             // 
             this.MoneyFormSaveBtn.BackColor = System.Drawing.Color.LightSalmon;
-            this.MoneyFormSaveBtn.Location = new System.Drawing.Point(470, 322);
+            this.MoneyFormSaveBtn.Location = new System.Drawing.Point(438, 293);
             this.MoneyFormSaveBtn.Name = "MoneyFormSaveBtn";
             this.MoneyFormSaveBtn.Size = new System.Drawing.Size(76, 54);
             this.MoneyFormSaveBtn.TabIndex = 10;
@@ -146,7 +148,7 @@ namespace MoneyV2._0
             // 
             // Qty100TB
             // 
-            this.Qty100TB.Location = new System.Drawing.Point(89, 25);
+            this.Qty100TB.Location = new System.Drawing.Point(414, 32);
             this.Qty100TB.Name = "Qty100TB";
             this.Qty100TB.Size = new System.Drawing.Size(75, 20);
             this.Qty100TB.TabIndex = 0;
@@ -156,7 +158,7 @@ namespace MoneyV2._0
             // 
             // Qty50TB
             // 
-            this.Qty50TB.Location = new System.Drawing.Point(89, 52);
+            this.Qty50TB.Location = new System.Drawing.Point(414, 59);
             this.Qty50TB.Name = "Qty50TB";
             this.Qty50TB.Size = new System.Drawing.Size(75, 20);
             this.Qty50TB.TabIndex = 1;
@@ -166,7 +168,7 @@ namespace MoneyV2._0
             // 
             // Qty20TB
             // 
-            this.Qty20TB.Location = new System.Drawing.Point(89, 79);
+            this.Qty20TB.Location = new System.Drawing.Point(414, 86);
             this.Qty20TB.Name = "Qty20TB";
             this.Qty20TB.Size = new System.Drawing.Size(75, 20);
             this.Qty20TB.TabIndex = 2;
@@ -176,7 +178,7 @@ namespace MoneyV2._0
             // 
             // Qty10TB
             // 
-            this.Qty10TB.Location = new System.Drawing.Point(89, 105);
+            this.Qty10TB.Location = new System.Drawing.Point(414, 112);
             this.Qty10TB.Name = "Qty10TB";
             this.Qty10TB.Size = new System.Drawing.Size(75, 20);
             this.Qty10TB.TabIndex = 3;
@@ -186,7 +188,7 @@ namespace MoneyV2._0
             // 
             // Qty5TB
             // 
-            this.Qty5TB.Location = new System.Drawing.Point(89, 131);
+            this.Qty5TB.Location = new System.Drawing.Point(414, 138);
             this.Qty5TB.Name = "Qty5TB";
             this.Qty5TB.Size = new System.Drawing.Size(75, 20);
             this.Qty5TB.TabIndex = 4;
@@ -196,7 +198,7 @@ namespace MoneyV2._0
             // 
             // Qty2TB
             // 
-            this.Qty2TB.Location = new System.Drawing.Point(89, 157);
+            this.Qty2TB.Location = new System.Drawing.Point(414, 164);
             this.Qty2TB.Name = "Qty2TB";
             this.Qty2TB.Size = new System.Drawing.Size(75, 20);
             this.Qty2TB.TabIndex = 5;
@@ -206,7 +208,7 @@ namespace MoneyV2._0
             // 
             // Qty1TB
             // 
-            this.Qty1TB.Location = new System.Drawing.Point(89, 183);
+            this.Qty1TB.Location = new System.Drawing.Point(414, 190);
             this.Qty1TB.Name = "Qty1TB";
             this.Qty1TB.Size = new System.Drawing.Size(75, 20);
             this.Qty1TB.TabIndex = 6;
@@ -217,7 +219,7 @@ namespace MoneyV2._0
             // Qty100Label
             // 
             this.Qty100Label.AutoSize = true;
-            this.Qty100Label.Location = new System.Drawing.Point(170, 30);
+            this.Qty100Label.Location = new System.Drawing.Point(495, 37);
             this.Qty100Label.Name = "Qty100Label";
             this.Qty100Label.Size = new System.Drawing.Size(33, 13);
             this.Qty100Label.TabIndex = 22;
@@ -226,7 +228,7 @@ namespace MoneyV2._0
             // Qty50Label
             // 
             this.Qty50Label.AutoSize = true;
-            this.Qty50Label.Location = new System.Drawing.Point(170, 55);
+            this.Qty50Label.Location = new System.Drawing.Point(495, 62);
             this.Qty50Label.Name = "Qty50Label";
             this.Qty50Label.Size = new System.Drawing.Size(27, 13);
             this.Qty50Label.TabIndex = 23;
@@ -235,7 +237,7 @@ namespace MoneyV2._0
             // Qty20Label
             // 
             this.Qty20Label.AutoSize = true;
-            this.Qty20Label.Location = new System.Drawing.Point(170, 82);
+            this.Qty20Label.Location = new System.Drawing.Point(495, 89);
             this.Qty20Label.Name = "Qty20Label";
             this.Qty20Label.Size = new System.Drawing.Size(27, 13);
             this.Qty20Label.TabIndex = 24;
@@ -244,7 +246,7 @@ namespace MoneyV2._0
             // Qty10Label
             // 
             this.Qty10Label.AutoSize = true;
-            this.Qty10Label.Location = new System.Drawing.Point(170, 108);
+            this.Qty10Label.Location = new System.Drawing.Point(495, 115);
             this.Qty10Label.Name = "Qty10Label";
             this.Qty10Label.Size = new System.Drawing.Size(27, 13);
             this.Qty10Label.TabIndex = 25;
@@ -253,7 +255,7 @@ namespace MoneyV2._0
             // Qty5Label
             // 
             this.Qty5Label.AutoSize = true;
-            this.Qty5Label.Location = new System.Drawing.Point(170, 134);
+            this.Qty5Label.Location = new System.Drawing.Point(495, 141);
             this.Qty5Label.Name = "Qty5Label";
             this.Qty5Label.Size = new System.Drawing.Size(21, 13);
             this.Qty5Label.TabIndex = 26;
@@ -262,7 +264,7 @@ namespace MoneyV2._0
             // Qty2Label
             // 
             this.Qty2Label.AutoSize = true;
-            this.Qty2Label.Location = new System.Drawing.Point(170, 160);
+            this.Qty2Label.Location = new System.Drawing.Point(495, 167);
             this.Qty2Label.Name = "Qty2Label";
             this.Qty2Label.Size = new System.Drawing.Size(21, 13);
             this.Qty2Label.TabIndex = 27;
@@ -271,7 +273,7 @@ namespace MoneyV2._0
             // Qty1Label
             // 
             this.Qty1Label.AutoSize = true;
-            this.Qty1Label.Location = new System.Drawing.Point(170, 186);
+            this.Qty1Label.Location = new System.Drawing.Point(495, 193);
             this.Qty1Label.Name = "Qty1Label";
             this.Qty1Label.Size = new System.Drawing.Size(21, 13);
             this.Qty1Label.TabIndex = 28;
@@ -279,27 +281,41 @@ namespace MoneyV2._0
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(309, 55);
+            this.dateTimePicker.Location = new System.Drawing.Point(108, 112);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(156, 20);
             this.dateTimePicker.TabIndex = 8;
             this.dateTimePicker.TabStop = false;
             // 
-            // dateTimePickerLabel
+            // NextDateBtn
             // 
-            this.dateTimePickerLabel.AutoSize = true;
-            this.dateTimePickerLabel.Location = new System.Drawing.Point(264, 59);
-            this.dateTimePickerLabel.Name = "dateTimePickerLabel";
-            this.dateTimePickerLabel.Size = new System.Drawing.Size(39, 13);
-            this.dateTimePickerLabel.TabIndex = 31;
-            this.dateTimePickerLabel.Text = "Дата :";
+            this.NextDateBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("NextDateBtn.BackgroundImage")));
+            this.NextDateBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.NextDateBtn.Location = new System.Drawing.Point(270, 107);
+            this.NextDateBtn.Name = "NextDateBtn";
+            this.NextDateBtn.Size = new System.Drawing.Size(30, 31);
+            this.NextDateBtn.TabIndex = 32;
+            this.NextDateBtn.UseVisualStyleBackColor = true;
+            this.NextDateBtn.Click += new System.EventHandler(this.NextDateBtn_Click);
+            // 
+            // PreviusDateBtn
+            // 
+            this.PreviusDateBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PreviusDateBtn.BackgroundImage")));
+            this.PreviusDateBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PreviusDateBtn.Location = new System.Drawing.Point(72, 107);
+            this.PreviusDateBtn.Name = "PreviusDateBtn";
+            this.PreviusDateBtn.Size = new System.Drawing.Size(30, 31);
+            this.PreviusDateBtn.TabIndex = 33;
+            this.PreviusDateBtn.UseVisualStyleBackColor = true;
+            this.PreviusDateBtn.Click += new System.EventHandler(this.PreviusDateBtn_Click);
             // 
             // MoneyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 388);
-            this.Controls.Add(this.dateTimePickerLabel);
+            this.ClientSize = new System.Drawing.Size(581, 395);
+            this.Controls.Add(this.PreviusDateBtn);
+            this.Controls.Add(this.NextDateBtn);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.Qty1Label);
             this.Controls.Add(this.Qty2Label);
@@ -323,9 +339,9 @@ namespace MoneyV2._0
             this.Controls.Add(this.AimComboBox);
             this.Controls.Add(this.CategoryComboBox);
             this.Controls.Add(this.NoteLabel);
-            this.Controls.Add(this.OutcomeAmount);
+            this.Controls.Add(this.AmountLabel);
             this.Name = "MoneyForm";
-            this.Text = "Пари";
+            this.Text = "Приход/Разход";
             this.Load += new System.EventHandler(this.MoneyForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -334,7 +350,7 @@ namespace MoneyV2._0
 
         #endregion
 
-        private System.Windows.Forms.Label OutcomeAmount;
+        private System.Windows.Forms.Label AmountLabel;
         private System.Windows.Forms.Label NoteLabel;
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.ComboBox AimComboBox;
@@ -358,6 +374,7 @@ namespace MoneyV2._0
         private System.Windows.Forms.Label Qty2Label;
         private System.Windows.Forms.Label Qty1Label;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.Label dateTimePickerLabel;
+        private System.Windows.Forms.Button NextDateBtn;
+        private System.Windows.Forms.Button PreviusDateBtn;
     }
 }

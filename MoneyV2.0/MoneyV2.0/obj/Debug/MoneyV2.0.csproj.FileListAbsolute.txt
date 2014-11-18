@@ -24,7 +24,6 @@ F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\EntityFramework.dll
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\EntityFramework.SqlServer.dll
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\EntityFramework.xml
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\EntityFramework.SqlServer.xml
-F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.csprojResolveAssemblyReference.cache
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.HistoryForm.resources
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.Menu.resources
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.CategoryForm.resources
@@ -32,3 +31,4 @@ F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.MoneyForm.res
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.PasswordForm.resources
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.Properties.Resources.resources
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.csproj.GenerateResource.Cache
+F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.csprojResolveAssemblyReference.cache

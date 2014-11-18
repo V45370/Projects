@@ -17,6 +17,7 @@ namespace MoneyV2._0
         public string CategorySelected;
         public string AimSelected;
         public string Owner;
+        public bool MoneyFormWasSaved = false;
         private DateTime today = DateTime.Today;
         public Menu()
         {
@@ -49,30 +50,32 @@ namespace MoneyV2._0
 
         private void OpenMoneyFormBtn_Click(object sender, EventArgs e)
         {
+            MoneyFormWasSaved = false;
             var moneyForm = new MoneyForm(this);
             moneyForm.ShowDialog();
-            
-            using (var db = new DatabaseContext())
+            if (MoneyFormWasSaved)
             {
-                var thisSession =  db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
-                var foundCategoryInDb = db.Categories
-                    .SingleOrDefault(x => x.CategoryName.Equals(CategorySelected));               
+                using (var db = new DatabaseContext())
+                {
+                    var thisSession = db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
+                    var foundCategoryInDb = db.Categories
+                        .SingleOrDefault(x => x.CategoryName.Equals(CategorySelected));
 
-                var foundAimInDb = db.Aims
-                    .SingleOrDefault(x => x.AimName.Equals(AimSelected));
+                    var foundAimInDb = db.Aims
+                        .SingleOrDefault(x => x.AimName.Equals(AimSelected));
 
-                lastMoneyRecord.Aim = foundAimInDb;
-                lastMoneyRecord.Category = foundCategoryInDb;
-                lastMoneyRecord.Owner = Owner;
-                var copy = (Money)lastMoneyRecord.DeepCopy();
-                if (copy == lastMoneyRecord.ToString()) MessageBox.Show("Im fucked");
+                    lastMoneyRecord.Aim = foundAimInDb;
+                    lastMoneyRecord.Category = foundCategoryInDb;
+                    lastMoneyRecord.Owner = Owner;
+                    //Workaround EntityFramework. Original Object causes exception!
+                    var copy = (Money)lastMoneyRecord.DeepCopy();
+                    thisSession.Money.Add(copy);
+                    db.SaveChanges();
 
-                thisSession.Money.Add(copy);
-                
-                db.SaveChanges();
-
+                }
+                ReloadData();
             }
-            ReloadData();
+            
         }
         public void ReloadData()
         {

@@ -5,12 +5,14 @@ using System.Windows.Forms;
 using MoneyV2._0.Controllers;
 using MoneyV2._0.Interfaces;
 using MoneyV2._0.Models;
+using System.Drawing;
 
 namespace MoneyV2._0
 {
     public partial class MoneyForm : Form
     {
-        public bool isNewMoneyCategoryIncome = false; // used in CategoryForm when picking
+        private bool isCurrentCategoryIncome = false;
+        public bool isNewMoneyCategoryIncome=false; // used in CategoryForm when picking
         private bool isCategorySelectedIncome = false;
         private bool existingCategoryValue = false;
         private bool existingAimValue = false;
@@ -19,7 +21,6 @@ namespace MoneyV2._0
         {
             InitializeComponent();
             parent = _parent;
-            
         }
 
         private void OpenCategoryForm()
@@ -81,7 +82,7 @@ namespace MoneyV2._0
                             db.SaveChanges();
                         }
                         ReloadData();
-                        CategoryComboBox.Text = currentSelectedCategory;
+                        CategoryComboBox.Text = currentSelectedCategory;                        
                     }
 
                 }
@@ -164,16 +165,6 @@ namespace MoneyV2._0
         private void MoneyForm_Load(object sender, EventArgs e)
         {
             ComboboxesAdjustements();
-            //using (var db = new DatabaseContext())
-            //{
-            //    var categoryList = new List<string>();
-            //    var categories = db.Categories;
-            //    foreach (var category in categories)
-            //    {
-            //        categoryList.Add(category.CategoryName);
-            //    }
-            //    this.CategoryComboBox.DataSource = categoryList;
-            //}
             ReloadData();
             
         }
@@ -183,6 +174,9 @@ namespace MoneyV2._0
             //Aim combobox loads items for selected category 
             using (var db = new DatabaseContext())
             {
+                var selectedCat = db.Categories.SingleOrDefault(c => c.CategoryName.Equals(CategoryComboBox.Text));
+                isCurrentCategoryIncome = selectedCat.isIncome;
+
                 var aims = from a in db.Categories
                            from b in a.Aims
                            where a.CategoryName == CategoryComboBox.Text
@@ -190,11 +184,42 @@ namespace MoneyV2._0
                 
                 var aimslist = aims.ToList<string>();
                 AimComboBox.DataSource = aimslist;
-            }            
-            
+            }
 
+            LockTextBoxesAndChangeColor();
         }
 
+        private void LockTextBoxesAndChangeColor()
+        {
+            if (isCurrentCategoryIncome)
+            {
+                Qty100TB.ReadOnly = false;
+                Qty50TB.ReadOnly = false;
+                Qty20TB.ReadOnly = false;
+                Qty10TB.ReadOnly = false;
+                Qty5TB.ReadOnly = false;
+                Qty2TB.ReadOnly = false;
+                Qty1TB.ReadOnly = false;
+                AmountTB.ReadOnly = true;
+                AmountLabel.Text = "Приходна сума";
+                CategoryComboBox.BackColor = Color.PaleGreen;
+            }
+            else
+            {
+                Qty100TB.ReadOnly = true;
+                Qty50TB.ReadOnly = true;
+                Qty20TB.ReadOnly = true;
+                Qty10TB.ReadOnly = true;
+                Qty5TB.ReadOnly = true;
+                Qty2TB.ReadOnly = true;
+                Qty1TB.ReadOnly = true;
+                AmountTB.ReadOnly = false;
+
+                AmountLabel.Text = "Разходна сума";
+                CategoryComboBox.BackColor = Color.LightSalmon;
+            }
+                
+        }
         public void ReloadData()
         {
             
@@ -223,35 +248,6 @@ namespace MoneyV2._0
 
         private void MoneyFormSaveBtn_Click(object sender, EventArgs e)
         {
-            //-----MOVE TO MENU FORM!!!-----
-
-            //var money = new Money();
-            //using(var db = new DatabaseContext())
-            //{
-            //    money.Amount = double.Parse(this.AmountTB.Text);
-            //    money.Date = dateTimePicker.Value.Date;
-            //    money.Note = NoteTextBox.Text;
-            //    money.Quantity1 = int.Parse(Qty1TB.Text);
-            //    money.Quantity2 = int.Parse(Qty2TB.Text); 
-            //    money.Quantity5 = int.Parse(Qty5TB.Text);
-            //    money.Quantity10 = int.Parse(Qty10TB.Text);
-            //    money.Quantity20 = int.Parse(Qty20TB.Text);
-            //    money.Quantity50 = int.Parse(Qty50TB.Text);
-            //    money.Quantity100 = int.Parse(Qty100TB.Text);
-            //    var foundCategoryInDb = db.Categories
-            //        .SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.Text));
-            //    money.Category = foundCategoryInDb;
-
-            //    var foundAimInDb = db.Aims
-            //        .SingleOrDefault(x => x.AimName.Equals(this.AimComboBox.Text));
-            //    money.Aim = foundAimInDb;
-                
-                //db.Money.Add(money);
-                //db.SaveChanges();
-                
-            //}
-            //parent.session.Money.Add(money);
-
             parent.lastMoneyRecord.Amount = double.Parse(this.AmountTB.Text);
             parent.lastMoneyRecord.Date = dateTimePicker.Value.Date;
             parent.lastMoneyRecord.Note = NoteTextBox.Text;
@@ -265,7 +261,8 @@ namespace MoneyV2._0
             parent.CategorySelected = this.CategoryComboBox.Text;
             parent.AimSelected = this.AimComboBox.Text;
             parent.Owner = Environment.MachineName;
-            
+
+            parent.MoneyFormWasSaved = true;
             this.Close();
         }
         private void OnTextChanged(object sender, EventArgs e)
@@ -281,6 +278,21 @@ namespace MoneyV2._0
             {
                 SumAllBanknotiOnTextChanged();
             }
+        }
+
+        private void NextDateBtn_Click(object sender, EventArgs e)
+        {
+           dateTimePicker.Value = dateTimePicker.Value.AddDays(1);
+        }
+
+        private void PreviusDateBtn_Click(object sender, EventArgs e)
+        {
+            dateTimePicker.Value = dateTimePicker.Value.AddDays(-1);
+        }
+
+        private void OutcomeAmount_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
