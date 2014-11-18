@@ -14,9 +14,11 @@ namespace MoneyV2._0
         private bool isCategorySelectedIncome = false;
         private bool existingCategoryValue = false;
         private bool existingAimValue = false;
-        public MoneyForm()
+        private Menu parent;
+        public MoneyForm(Menu _parent)
         {
             InitializeComponent();
+            parent = _parent;
             
         }
 
@@ -162,23 +164,23 @@ namespace MoneyV2._0
         private void MoneyForm_Load(object sender, EventArgs e)
         {
             ComboboxesAdjustements();
-            using (var db = new DatabaseContext())
-            {
-                var categoryList = new List<string>();
-                var categories = db.Categories;
-                foreach (var category in categories)
-                {
-                    categoryList.Add(category.CategoryName);
-                }
-                this.CategoryComboBox.DataSource = categoryList;
-            }
+            //using (var db = new DatabaseContext())
+            //{
+            //    var categoryList = new List<string>();
+            //    var categories = db.Categories;
+            //    foreach (var category in categories)
+            //    {
+            //        categoryList.Add(category.CategoryName);
+            //    }
+            //    this.CategoryComboBox.DataSource = categoryList;
+            //}
             ReloadData();
             
         }
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //MessageBox.Show(CategoryComboBox.SelectedValue.ToString());
+            //Aim combobox loads items for selected category 
             using (var db = new DatabaseContext())
             {
                 var aims = from a in db.Categories
@@ -221,30 +223,35 @@ namespace MoneyV2._0
 
         private void MoneyFormSaveBtn_Click(object sender, EventArgs e)
         {
-            using(var db = new DatabaseContext())
-            {
-                var money = new Money();
-                money.Amount = double.Parse(this.AmountTB.Text);
-                money.Date = dateTimePicker.Value.Date;
-                money.Note = NoteTextBox.Text;
-                money.Quantity1 = int.Parse(Qty1TB.Text);
-                money.Quantity2 = int.Parse(Qty2TB.Text);
-                money.Quantity5 = int.Parse(Qty5TB.Text);
-                money.Quantity10 = int.Parse(Qty10TB.Text);
-                money.Quantity20 = int.Parse(Qty20TB.Text);
-                money.Quantity50 = int.Parse(Qty50TB.Text);
-                money.Quantity100 = int.Parse(Qty100TB.Text);
-                var foundCategoryInDb = db.Categories
-                    .SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.Text));
-                money.Category = foundCategoryInDb;
+            //-----MOVE TO MENU FORM!!!-----
 
-                var foundAimInDb = db.Aims
-                    .SingleOrDefault(x => x.AimName.Equals(this.AimComboBox.Text));
-                money.Aim = foundAimInDb;
+            //var money = new Money();
+            //using(var db = new DatabaseContext())
+            //{
+            //    money.Amount = double.Parse(this.AmountTB.Text);
+            //    money.Date = dateTimePicker.Value.Date;
+            //    money.Note = NoteTextBox.Text;
+            //    money.Quantity1 = int.Parse(Qty1TB.Text);
+            //    money.Quantity2 = int.Parse(Qty2TB.Text); 
+            //    money.Quantity5 = int.Parse(Qty5TB.Text);
+            //    money.Quantity10 = int.Parse(Qty10TB.Text);
+            //    money.Quantity20 = int.Parse(Qty20TB.Text);
+            //    money.Quantity50 = int.Parse(Qty50TB.Text);
+            //    money.Quantity100 = int.Parse(Qty100TB.Text);
+            //    var foundCategoryInDb = db.Categories
+            //        .SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.Text));
+            //    money.Category = foundCategoryInDb;
+
+            //    var foundAimInDb = db.Aims
+            //        .SingleOrDefault(x => x.AimName.Equals(this.AimComboBox.Text));
+            //    money.Aim = foundAimInDb;
                 
-                db.Money.Add(money);
-                db.SaveChanges();
-            }
+            //    //db.Money.Add(money);
+            //    //db.SaveChanges();
+                
+            //}
+            //parent.session.Money.Add(money);
+            
             this.Close();
         }
         private void OnTextChanged(object sender, EventArgs e)

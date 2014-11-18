@@ -8,11 +8,36 @@ using MoneyV2._0.Controllers;
 namespace MoneyV2._0
 {
     public partial class Menu : Form
-
     {
+        public Session session = new Session();
+        private bool doesSessionExists = false;
+        public Money money = new Money();
+        public string CategorySelected;
+        public string AimSelected;
         public Menu()
         {
             InitializeComponent();
+        }
+        private void Menu_Load(object sender, EventArgs e)
+        {
+            var today = DateTime.Today;
+            //Check if Session exists in database
+            using (var db = new DatabaseContext())
+            {
+                var checkSessionExists =  db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
+                if (checkSessionExists.Date == today)
+                {
+                    doesSessionExists = true;
+                }
+                else
+                {
+                    doesSessionExists = false;
+                }
+
+            }
+
+            ListViewAdjustments();
+            ReloadData();
         }
 
         private void OpenHistoryForm_Click(object sender, EventArgs e)
@@ -23,11 +48,18 @@ namespace MoneyV2._0
 
         private void OpenMoneyFormBtn_Click(object sender, EventArgs e)
         {
-            var moneyForm = new MoneyForm();
+            var moneyForm = new MoneyForm(this);
             moneyForm.ShowDialog();
             ReloadData();
-        }
+            using (var db = new DatabaseContext())
+            {
+                //var proba =  db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
+                //MessageBox.Show(proba.Date.ToString());
+                db.Sessions.Add(session);
+                db.SaveChanges();
 
+            }
+        }
         public void ReloadData()
         {
             if (CashDeskListView.Items.Count>0)
@@ -87,13 +119,7 @@ namespace MoneyV2._0
                 this.CashDeskListView.Items.Add(new ListViewItem(itemValues));
             }
         }
-        private void Menu_Load(object sender, EventArgs e)
-        {
-            var today = DateTime.Today;
-            MessageBox.Show(today.ToString());
-            ListViewAdjustments();            
-            ReloadData();
-        }
+        
         private void ListViewAdjustments()
         {
             //nastroivane na listview

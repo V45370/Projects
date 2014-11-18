@@ -343,8 +343,6 @@ namespace MoneyV2._0
         private System.Windows.Forms.Label AimLabel;
         private System.Windows.Forms.RichTextBox NoteTextBox;
         private System.Windows.Forms.Button MoneyFormSaveBtn;
-        public bool areComboBoxesEmpty = true;
-        public ITranferData parent;
         private System.Windows.Forms.TextBox Qty100TB;
         private System.Windows.Forms.TextBox Qty50TB;
         private System.Windows.Forms.TextBox Qty20TB;
@@ -359,7 +357,6 @@ namespace MoneyV2._0
         private System.Windows.Forms.Label Qty5Label;
         private System.Windows.Forms.Label Qty2Label;
         private System.Windows.Forms.Label Qty1Label;
-        bool notFromOfis = false;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Label dateTimePickerLabel;
     }
