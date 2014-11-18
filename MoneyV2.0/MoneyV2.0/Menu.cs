@@ -4,34 +4,35 @@ using System.Windows.Forms;
 using MoneyV2._0.Interfaces;
 using MoneyV2._0.Models;
 using MoneyV2._0.Controllers;
+using System.Net;
+using System.Net.Sockets;
 
 namespace MoneyV2._0
 {
     public partial class Menu : Form
     {
         public Session session = new Session();
-        private bool doesSessionExists = false;
-        public Money money = new Money();
+       // private bool doesSessionExists = false;
+        public Money lastMoneyRecord = new Money();
         public string CategorySelected;
         public string AimSelected;
+        public string Owner;
+        private DateTime today = DateTime.Today;
         public Menu()
         {
             InitializeComponent();
         }
+        
         private void Menu_Load(object sender, EventArgs e)
-        {
-            var today = DateTime.Today;
+        {            
             //Check if Session exists in database
             using (var db = new DatabaseContext())
             {
                 var checkSessionExists =  db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
-                if (checkSessionExists.Date == today)
+                if (checkSessionExists==null || !checkSessionExists.Date.Equals(today))
                 {
-                    doesSessionExists = true;
-                }
-                else
-                {
-                    doesSessionExists = false;
+                    db.Sessions.Add(new Session() { Date = today });
+                    db.SaveChanges();
                 }
 
             }
@@ -50,15 +51,28 @@ namespace MoneyV2._0
         {
             var moneyForm = new MoneyForm(this);
             moneyForm.ShowDialog();
-            ReloadData();
+            
             using (var db = new DatabaseContext())
             {
-                //var proba =  db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
-                //MessageBox.Show(proba.Date.ToString());
-                db.Sessions.Add(session);
+                var thisSession =  db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
+                var foundCategoryInDb = db.Categories
+                    .SingleOrDefault(x => x.CategoryName.Equals(CategorySelected));               
+
+                var foundAimInDb = db.Aims
+                    .SingleOrDefault(x => x.AimName.Equals(AimSelected));
+
+                lastMoneyRecord.Aim = foundAimInDb;
+                lastMoneyRecord.Category = foundCategoryInDb;
+                lastMoneyRecord.Owner = Owner;
+                var copy = (Money)lastMoneyRecord.DeepCopy();
+                if (copy == lastMoneyRecord.ToString()) MessageBox.Show("Im fucked");
+
+                thisSession.Money.Add(copy);
+                
                 db.SaveChanges();
 
             }
+            ReloadData();
         }
         public void ReloadData()
         {

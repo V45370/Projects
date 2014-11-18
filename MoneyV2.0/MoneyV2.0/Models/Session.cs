@@ -15,7 +15,6 @@ namespace MoneyV2._0.Models
 
         public int SessionId { get; set; }
         public DateTime Date { get; set; }
-        public string Owner { get; set; }
         public virtual ICollection<Money> Money { get; set; }
     }
 }

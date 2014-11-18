@@ -21,9 +21,31 @@ namespace MoneyV2._0.Models
         public double Amount { get; set; }
         public DateTime Date { get; set; }
         public string Note { get; set; }
+        public string Owner { get; set; }
         public virtual Category Category { get; set; }
         public virtual Aim Aim { get; set; }
         public virtual Session Session { get; set; }
+
+        public Money DeepCopy()
+        {
+            Money other = (Money)this.MemberwiseClone();
+            other.Quantity1 = Quantity1;
+            other.Quantity2 = Quantity2;
+            other.Quantity5 = Quantity5;
+            other.Quantity10 = Quantity10;
+            other.Quantity20 = Quantity20;
+            other.Quantity50 = Quantity50;
+            other.Quantity100 = Quantity100;
+            other.Amount = Amount;
+            other.Date = Date;
+            other.Note = String.Copy(Note);
+            other.Owner = String.Copy(Owner);
+            other.Category = Category;
+            other.Aim = Aim;
+            other.Session = Session;
+
+            return other;
+        }
       
     }
 }

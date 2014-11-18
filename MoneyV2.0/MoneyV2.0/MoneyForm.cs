@@ -246,11 +246,25 @@ namespace MoneyV2._0
             //        .SingleOrDefault(x => x.AimName.Equals(this.AimComboBox.Text));
             //    money.Aim = foundAimInDb;
                 
-            //    //db.Money.Add(money);
-            //    //db.SaveChanges();
+                //db.Money.Add(money);
+                //db.SaveChanges();
                 
             //}
             //parent.session.Money.Add(money);
+
+            parent.lastMoneyRecord.Amount = double.Parse(this.AmountTB.Text);
+            parent.lastMoneyRecord.Date = dateTimePicker.Value.Date;
+            parent.lastMoneyRecord.Note = NoteTextBox.Text;
+            parent.lastMoneyRecord.Quantity1 = int.Parse(Qty1TB.Text);
+            parent.lastMoneyRecord.Quantity2 = int.Parse(Qty2TB.Text);
+            parent.lastMoneyRecord.Quantity5 = int.Parse(Qty5TB.Text);
+            parent.lastMoneyRecord.Quantity10 = int.Parse(Qty10TB.Text);
+            parent.lastMoneyRecord.Quantity20 = int.Parse(Qty20TB.Text);
+            parent.lastMoneyRecord.Quantity50 = int.Parse(Qty50TB.Text);
+            parent.lastMoneyRecord.Quantity100 = int.Parse(Qty100TB.Text);
+            parent.CategorySelected = this.CategoryComboBox.Text;
+            parent.AimSelected = this.AimComboBox.Text;
+            parent.Owner = Environment.MachineName;
             
             this.Close();
         }
