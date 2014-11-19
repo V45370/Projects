@@ -65,11 +65,12 @@
             // 
             // SessionView
             // 
-            this.SessionView.Location = new System.Drawing.Point(279, 100);
+            this.SessionView.Location = new System.Drawing.Point(265, 100);
             this.SessionView.Name = "SessionView";
-            this.SessionView.Size = new System.Drawing.Size(604, 415);
+            this.SessionView.Size = new System.Drawing.Size(618, 402);
             this.SessionView.TabIndex = 4;
             this.SessionView.UseCompatibleStateImageBehavior = false;
+            this.SessionView.View = System.Windows.Forms.View.Details;
             // 
             // Menu
             // 

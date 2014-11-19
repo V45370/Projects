@@ -6,6 +6,7 @@ using MoneyV2._0.Models;
 using MoneyV2._0.Controllers;
 using System.Net;
 using System.Net.Sockets;
+using System.Collections.Generic;
 
 namespace MoneyV2._0
 {
@@ -23,7 +24,7 @@ namespace MoneyV2._0
         {
             InitializeComponent();
         }
-        
+
         private void Menu_Load(object sender, EventArgs e)
         {            
             //Check if Session exists in database
@@ -37,7 +38,6 @@ namespace MoneyV2._0
                 }
 
             }
-
             ListViewAdjustments();
             ReloadData();
         }
@@ -79,7 +79,21 @@ namespace MoneyV2._0
         }
         public void ReloadData()
         {
-            if (CashDeskListView.Items.Count>0)
+
+            LoadCashDeskView();
+            LoadSessionView();
+        } 
+        private void LoadSessionView()
+        {
+            using (var db = new MoneyContext())
+            {
+                IEnumerable<Money> moneyForSession = db.Money.Where(m => m.Session.Date.Equals(today)).ToList();
+
+            }
+        }
+        private void LoadCashDeskView()
+        {
+            if (CashDeskListView.Items.Count > 0)
             {
                 CashDeskListView.Items.RemoveAt(0);
             }
@@ -139,7 +153,7 @@ namespace MoneyV2._0
         
         private void ListViewAdjustments()
         {
-            //nastroivane na listview
+            //CashDeskView
             ColumnHeader headerQty1 = new ColumnHeader();
             ColumnHeader headerQty2 = new ColumnHeader();
             ColumnHeader headerQty5 = new ColumnHeader();
@@ -188,6 +202,44 @@ namespace MoneyV2._0
             headerCashDesk.Width = 100;
             headerCashDesk.TextAlign = HorizontalAlignment.Center;
             this.CashDeskListView.Columns.Add(headerCashDesk);
+
+            //SessionView
+            ColumnHeader headerNumber = new ColumnHeader();
+            ColumnHeader headerDate = new ColumnHeader();
+            ColumnHeader headerCategory = new ColumnHeader();
+            ColumnHeader headerAim = new ColumnHeader();
+            ColumnHeader headerAmount = new ColumnHeader();
+            ColumnHeader headerOwner = new ColumnHeader();
+
+            headerNumber.Text = "№";
+            headerNumber.Width = 20;
+            headerNumber.TextAlign = HorizontalAlignment.Center;
+            this.CashDeskListView.Columns.Add(headerNumber);
+
+            headerDate.Text = "Дата";
+            headerDate.Width = 150;
+            headerDate.TextAlign = HorizontalAlignment.Center;
+            this.CashDeskListView.Columns.Add(headerDate);
+
+            headerCategory.Text = "Категория";
+            headerCategory.Width = 150;
+            headerCategory.TextAlign = HorizontalAlignment.Center;
+            this.CashDeskListView.Columns.Add(headerCategory);
+
+            headerAim.Text = "Цел";
+            headerAim.Width = 150;
+            headerAim.TextAlign = HorizontalAlignment.Center;
+            this.CashDeskListView.Columns.Add(headerAim);
+
+            headerAmount.Text = "Сума";
+            headerAmount.Width = 100;
+            headerAmount.TextAlign = HorizontalAlignment.Center;
+            this.CashDeskListView.Columns.Add(headerAmount);
+
+            headerOwner.Text = "от Компютър";
+            headerOwner.Width = 100;
+            headerOwner.TextAlign = HorizontalAlignment.Center;
+            this.CashDeskListView.Columns.Add(headerOwner);
         }
     }
 }
