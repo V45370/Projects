@@ -13,6 +13,8 @@ namespace MoneyV2._0
     public partial class Menu : Form
     {
         public Session session = new Session();
+        private bool onlyThisComputer = false;
+        private bool SessionIsEmpty = false;
        // private bool doesSessionExists = false;
         public Money lastMoneyRecord = new Money();
         public string CategorySelected;
@@ -20,13 +22,14 @@ namespace MoneyV2._0
         public string Owner;
         public bool MoneyFormWasSaved = false;
         private DateTime today = DateTime.Today;
+        private DateTime pickedDate;
         public Menu()
         {
             InitializeComponent();
         }
 
         private void Menu_Load(object sender, EventArgs e)
-        {            
+        {
             //Check if Session exists in database
             using (var db = new DatabaseContext())
             {
@@ -38,7 +41,6 @@ namespace MoneyV2._0
                 }
 
             }
-            ListViewAdjustments();
             ReloadData();
         }
 
@@ -81,13 +83,78 @@ namespace MoneyV2._0
         {
 
             LoadCashDeskView();
+            ReloadSessionView();
+        }
+        private void ReloadSessionView()
+        {
+            ClearSessionView();
             LoadSessionView();
-        } 
+        }
+        private void ClearSessionView()
+        {
+            SessionView.Items.Clear();
+        }
         private void LoadSessionView()
         {
-            using (var db = new MoneyContext())
+            using (var db = new DatabaseContext())
             {
-                IEnumerable<Money> moneyForSession = db.Money.Where(m => m.Session.Date.Equals(today)).ToList();
+                dynamic moneyInCurrentSession;
+                if (onlyThisComputer)
+                {
+                    moneyInCurrentSession = (from a in db.Money
+                                                 where a.Owner == Environment.MachineName
+                                                 where a.Session.Date == pickedDate                                                 
+                                                 select new
+                                                 {
+                                                     Date = a.Date,
+                                                     Category = a.Category.CategoryName,
+                                                     Aim = a.Aim.AimName,
+                                                     Amount = a.Amount,
+                                                     Owner = a.Owner,
+                                                     Note = a.Note
+                                                 }
+                                                 ).ToList();
+                }
+                else
+                {
+                    moneyInCurrentSession = (from a in db.Money
+                                                 where a.Session.Date == pickedDate
+                                                 select new
+                                                 {
+                                                     Date = a.Date,
+                                                     Category = a.Category.CategoryName,
+                                                     Aim = a.Aim.AimName,
+                                                     Amount = a.Amount,
+                                                     Owner = a.Owner,
+                                                     Note = a.Note
+                                                 }
+                                                 ).ToList();
+                }
+                
+                //if currentSession is not empty(populate)
+                if(moneyInCurrentSession.Count!=0)
+                {
+                    List<string[]> itemValues = new List<string[]>();
+                    int counter = 1;
+                    foreach (var item in moneyInCurrentSession)
+                    {
+                        itemValues.Add(new string[]{
+                            counter.ToString(),
+                            item.Date.ToShortDateString(),
+                            item.Category.ToString(),
+                            item.Aim.ToString(),
+                            item.Amount.ToString(),
+                            item.Owner,
+                            item.Note
+                        });
+                        counter++;
+                    }
+                    foreach (var item in itemValues)
+                    {
+                        this.SessionView.Items.Add(new ListViewItem(item));
+                    }
+                }
+
 
             }
         }
@@ -99,147 +166,63 @@ namespace MoneyV2._0
             }
             using (var db = new MoneyContext())
             {
-                var moneys = db.Money.ToList();
-                double tresor = 0;
-                int qty1 = 0;
-                int qty2 = 0;
-                int qty5 = 0;
-                int qty10 = 0;
-                int qty20 = 0;
-                int qty50 = 0;
-                int qty100 = 0;
-
-                foreach (var money in moneys)
-                {
-
-                    if (money.Category.isIncome == true)
-                    {
-                        qty1 += money.Quantity1;
-                        qty2 += money.Quantity2;
-                        qty5 += money.Quantity5;
-                        qty10 += money.Quantity10;
-                        qty20 += money.Quantity20;
-                        qty50 += money.Quantity50;
-                        qty100 += money.Quantity100;
-                        tresor += money.Amount;
-                    }
-                    else
-                    {
-                        qty1 -= money.Quantity1;
-                        qty2 -= money.Quantity2;
-                        qty5 -= money.Quantity5;
-                        qty10 -= money.Quantity10;
-                        qty20 -= money.Quantity20;
-                        qty50 -= money.Quantity50;
-                        qty100 -= money.Quantity100;
-                        tresor -= money.Amount;
-                    }
-                }
-
+                //extract Sum of all Incomes and Sum of all Outcomes, they are separated in cashDesk[0] and cashDesk[1]
+                var cashDesk = (from a in db.Money
+                                group a by a.Category into b
+                                select new
+                                {
+                                    Quantity1 = b.Sum(x => x.Quantity1),
+                                    Quantity2 = b.Sum(x => x.Quantity2),
+                                    Quantity5 = b.Sum(x => x.Quantity5),
+                                    Quantity10 = b.Sum(x => x.Quantity10),
+                                    Quantity20 = b.Sum(x => x.Quantity20),
+                                    Quantity50 = b.Sum(x => x.Quantity50),
+                                    Quantity100 = b.Sum(x => x.Quantity100),
+                                    Amount = b.Sum(x => x.Amount),
+                                }).ToList();
                 string[] itemValues = new string[] 
                 {
-                    qty1.ToString(),
-                    qty2.ToString(),
-                    qty5.ToString(),
-                    qty10.ToString(),
-                    qty20.ToString(),
-                    qty50.ToString(),
-                    qty100.ToString(),
-                    tresor.ToString()
+                    (cashDesk[0].Quantity100-cashDesk[1].Quantity100).ToString(),
+                    (cashDesk[0].Quantity50-cashDesk[1].Quantity50).ToString(),
+                    (cashDesk[0].Quantity20-cashDesk[1].Quantity20).ToString(),
+                    (cashDesk[0].Quantity10-cashDesk[1].Quantity10).ToString(),
+                    (cashDesk[0].Quantity5-cashDesk[1].Quantity5).ToString(),
+                    (cashDesk[0].Quantity2-cashDesk[1].Quantity2).ToString(),
+                    (cashDesk[0].Quantity1-cashDesk[1].Quantity1).ToString(),
+                    (cashDesk[0].Amount-cashDesk[1].Amount).ToString()
                 };
+                
                 this.CashDeskListView.Items.Add(new ListViewItem(itemValues));
+
             }
         }
-        
-        private void ListViewAdjustments()
+
+        private void NextDateBtn_Click(object sender, EventArgs e)
         {
-            //CashDeskView
-            ColumnHeader headerQty1 = new ColumnHeader();
-            ColumnHeader headerQty2 = new ColumnHeader();
-            ColumnHeader headerQty5 = new ColumnHeader();
-            ColumnHeader headerQty10 = new ColumnHeader();
-            ColumnHeader headerQty20 = new ColumnHeader();
-            ColumnHeader headerQty50 = new ColumnHeader();
-            ColumnHeader headerQty100 = new ColumnHeader();
-            ColumnHeader headerCashDesk = new ColumnHeader();
+            dateTimePicker.Value = dateTimePicker.Value.AddDays(1);
+            pickedDate = dateTimePicker.Value.Date;
+            ClearSessionView();
+            LoadSessionView();
+        }
 
-            headerQty1.Text = "x 1";
-            headerQty1.Width = 80;
-            headerQty1.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerQty1);
+        private void PreviusDateBtn_Click(object sender, EventArgs e)
+        {
+            dateTimePicker.Value = dateTimePicker.Value.AddDays(-1);
+            pickedDate = dateTimePicker.Value.Date;
+            ReloadSessionView();
+        }
 
-            headerQty2.Text = "x 2";
-            headerQty2.Width = 80;
-            headerQty2.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerQty2);
-
-            headerQty5.Text = "x 5";
-            headerQty5.Width = 80;
-            headerQty5.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerQty5);
-
-            headerQty10.Text = "x 10";
-            headerQty10.Width = 80;
-            headerQty10.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerQty10);
-
-            headerQty20.Text = "x 20";
-            headerQty20.Width = 80;
-            headerQty20.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerQty20);
-
-            headerQty50.Text = "x 50";
-            headerQty50.Width = 80;
-            headerQty50.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerQty50);
-
-            headerQty100.Text = "x 100";
-            headerQty100.Width = 80;
-            headerQty100.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerQty100);
-
-            headerCashDesk.Text = "Каса";
-            headerCashDesk.Width = 100;
-            headerCashDesk.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerCashDesk);
-
-            //SessionView
-            ColumnHeader headerNumber = new ColumnHeader();
-            ColumnHeader headerDate = new ColumnHeader();
-            ColumnHeader headerCategory = new ColumnHeader();
-            ColumnHeader headerAim = new ColumnHeader();
-            ColumnHeader headerAmount = new ColumnHeader();
-            ColumnHeader headerOwner = new ColumnHeader();
-
-            headerNumber.Text = "№";
-            headerNumber.Width = 20;
-            headerNumber.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerNumber);
-
-            headerDate.Text = "Дата";
-            headerDate.Width = 150;
-            headerDate.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerDate);
-
-            headerCategory.Text = "Категория";
-            headerCategory.Width = 150;
-            headerCategory.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerCategory);
-
-            headerAim.Text = "Цел";
-            headerAim.Width = 150;
-            headerAim.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerAim);
-
-            headerAmount.Text = "Сума";
-            headerAmount.Width = 100;
-            headerAmount.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerAmount);
-
-            headerOwner.Text = "от Компютър";
-            headerOwner.Width = 100;
-            headerOwner.TextAlign = HorizontalAlignment.Center;
-            this.CashDeskListView.Columns.Add(headerOwner);
+        private void ThisComputerCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(ThisComputerCheckBox.Checked)
+            {
+                onlyThisComputer = true;
+            }
+            else
+            {
+                onlyThisComputer = false;
+            }
+            ReloadSessionView();
         }
     }
 }
