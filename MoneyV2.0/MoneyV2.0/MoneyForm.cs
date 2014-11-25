@@ -11,6 +11,7 @@ namespace MoneyV2._0
 {
     public partial class MoneyForm : Form
     {
+        public List<Money> additiveMoney = new List<Money>();
         private bool isCurrentCategoryIncome = false;
         public bool isNewMoneyCategoryIncome=false; // used in CategoryForm when picking
         private bool isCategorySelectedIncome = false;
@@ -30,7 +31,7 @@ namespace MoneyV2._0
             
         }
 
-        private void SumAllBanknotiOnTextChanged()
+        private void ChangeAmountsOnTextChanged()
         {
             this.AmountTB.Text = (int.Parse(Qty100TB.Text) * 100
                 + int.Parse(Qty50TB.Text) * 50
@@ -39,6 +40,7 @@ namespace MoneyV2._0
                 + int.Parse(Qty5TB.Text) * 5
                 + int.Parse(Qty2TB.Text) * 2
                 + int.Parse(Qty1TB.Text) * 1).ToString();
+            this.TotalTB.Text = (double.Parse(AmountTB.Text) + double.Parse(AdditiveAmountTB.Text)).ToString();
         }
 
         private void ValidateCategoryCombobox()
@@ -94,7 +96,6 @@ namespace MoneyV2._0
             //if selected control is AimComboBox
             if (this.ActiveControl.Name == this.AimComboBox.Name)
             {
-                //MessageBox.Show(CategoryComboBox.Text);
                 foreach (var aim in AimComboBox.Items)
                 {
                     if (aim.ToString().Equals(AimComboBox.Text))
@@ -102,7 +103,6 @@ namespace MoneyV2._0
                         existingAimValue = true;
                     }
                 }
-                //MessageBox.Show(existingCategoryValue.ToString());
                 if (existingAimValue == false)
                 {
                     var currentSelectedAim = AimComboBox.Text;
@@ -171,7 +171,7 @@ namespace MoneyV2._0
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Aim combobox loads items for selected category 
+            //Aim combobox loads items when selected category 
             using (var db = new DatabaseContext())
             {
                 var selectedCat = db.Categories.SingleOrDefault(c => c.CategoryName.Equals(CategoryComboBox.Text));
@@ -194,49 +194,15 @@ namespace MoneyV2._0
             if (isCurrentCategoryIncome)
             {
                 AimLabel.Text = "Източник: ";
-                Qty100TB.Show();
-                Qty50TB.Show();
-                Qty20TB.Show();
-                Qty10TB.Show();
-                Qty5TB.Show();
-                Qty2TB.Show();
-                Qty1TB.Show();
-                Qty100Label.Show();
-                Qty50Label.Show();
-                Qty20Label.Show();
-                Qty10Label.Show();
-                Qty5Label.Show();
-                Qty2Label.Show();
-                Qty1Label.Show();
-                AmountTB.ReadOnly = true;
 
-                AmountTB.TabIndex = 10;
-
-                AmountLabel.Text = "Приход: ";
+                TotalTB.TabIndex = 10;
                 CategoryComboBox.BackColor = Color.PaleGreen;
             }
             else
             {
                 AimLabel.Text = "Цел: ";
-                Qty100TB.Hide();
-                Qty50TB.Hide();
-                Qty20TB.Hide();
-                Qty10TB.Hide();
-                Qty5TB.Hide();
-                Qty2TB.Hide();
-                Qty1TB.Hide();
-                Qty100Label.Hide();
-                Qty50Label.Hide();
-                Qty20Label.Hide();
-                Qty10Label.Hide();
-                Qty5Label.Hide();
-                Qty2Label.Hide();
-                Qty1Label.Hide();
-                AmountTB.ReadOnly = false;
 
-                AmountTB.TabIndex = 2;
-
-                AmountLabel.Text = "Разход: ";
+                TotalTB.TabIndex = 2;
                 CategoryComboBox.BackColor = Color.LightSalmon;
             }
                 
@@ -266,24 +232,45 @@ namespace MoneyV2._0
                 AimComboBox.DataSource = aimslist;
             }
         }
+        private void AddMoneyToSession()
+        {
+            using (var db = new DatabaseContext())
+            {
+                var moneyRecord = new Money();
+                var thisSession = db.Sessions.SingleOrDefault(x => x.Date.Equals(parent.today));
+                moneyRecord.Amount = double.Parse(this.AmountTB.Text);
+                moneyRecord.Date = dateTimePicker.Value.Date;
+                moneyRecord.Note = NoteTextBox.Text;
+                moneyRecord.Quantity1 = int.Parse(Qty1TB.Text);
+                moneyRecord.Quantity2 = int.Parse(Qty2TB.Text);
+                moneyRecord.Quantity5 = int.Parse(Qty5TB.Text);
+                moneyRecord.Quantity10 = int.Parse(Qty10TB.Text);
+                moneyRecord.Quantity20 = int.Parse(Qty20TB.Text);
+                moneyRecord.Quantity50 = int.Parse(Qty50TB.Text);
+                moneyRecord.Quantity100 = int.Parse(Qty100TB.Text);
+                moneyRecord.Category = db.Categories.SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.Text));
+                moneyRecord.Aim = db.Aims.SingleOrDefault(x => x.AimName.Equals(this.AimComboBox.Text));
+                moneyRecord.Owner = Environment.MachineName;
+                //Workaround EntityFramework. Original Object causes exception!
+                var deepCopy = (Money)moneyRecord.DeepCopy();
+                thisSession.Money.Add(deepCopy);
 
+                if(additiveMoney.Count!=0)
+                {
+                    foreach (var money in additiveMoney)
+                    {
+                        var copy = money.DeepCopy();
+                        thisSession.Money.Add(copy);
+                    }
+                }                
+                db.SaveChanges();
+
+                parent.MoneyFormWasSaved = true;
+            }
+        }
         private void MoneyFormSaveBtn_Click(object sender, EventArgs e)
         {
-            parent.lastMoneyRecord.Amount = double.Parse(this.AmountTB.Text);
-            parent.lastMoneyRecord.Date = dateTimePicker.Value.Date;
-            parent.lastMoneyRecord.Note = NoteTextBox.Text;
-            parent.lastMoneyRecord.Quantity1 = int.Parse(Qty1TB.Text);
-            parent.lastMoneyRecord.Quantity2 = int.Parse(Qty2TB.Text);
-            parent.lastMoneyRecord.Quantity5 = int.Parse(Qty5TB.Text);
-            parent.lastMoneyRecord.Quantity10 = int.Parse(Qty10TB.Text);
-            parent.lastMoneyRecord.Quantity20 = int.Parse(Qty20TB.Text);
-            parent.lastMoneyRecord.Quantity50 = int.Parse(Qty50TB.Text);
-            parent.lastMoneyRecord.Quantity100 = int.Parse(Qty100TB.Text);
-            parent.CategorySelected = this.CategoryComboBox.Text;
-            parent.AimSelected = this.AimComboBox.Text;
-            parent.Owner = Environment.MachineName;
-
-            parent.MoneyFormWasSaved = true;
+            AddMoneyToSession();
             this.Close();
         }
         private void OnTextChanged(object sender, EventArgs e)
@@ -297,7 +284,11 @@ namespace MoneyV2._0
             }
             else
             {
-                SumAllBanknotiOnTextChanged();
+                if(textBox.Name!=AmountTB.Name)
+                {
+                    ChangeAmountsOnTextChanged();
+                }
+                
             }
         }
 
@@ -311,8 +302,10 @@ namespace MoneyV2._0
             dateTimePicker.Value = dateTimePicker.Value.AddDays(-1);
         }
 
-        private void OutcomeAmount_Click(object sender, EventArgs e)
+        private void AdditiveOutcomeBtn_Click(object sender, EventArgs e)
         {
+            var additiveOutcomeForm = new AdditiveOutcomeForm(this);
+            additiveOutcomeForm.ShowDialog(this);
 
         }
     }

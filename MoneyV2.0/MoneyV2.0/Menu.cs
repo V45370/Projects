@@ -16,12 +16,12 @@ namespace MoneyV2._0
         private bool onlyThisComputer = false;
         private bool SessionIsEmpty = false;
        // private bool doesSessionExists = false;
-        public Money lastMoneyRecord = new Money();
-        public string CategorySelected;
-        public string AimSelected;
-        public string Owner;
+        //public Money lastMoneyRecord = new Money();
+        //public string CategorySelected;
+        //public string AimSelected;
+        //public string Owner;
         public bool MoneyFormWasSaved = false;
-        private DateTime today = DateTime.Today;
+        public DateTime today = DateTime.Today;
         private DateTime pickedDate;
         public Menu()
         {
@@ -57,24 +57,6 @@ namespace MoneyV2._0
             moneyForm.ShowDialog();
             if (MoneyFormWasSaved)
             {
-                using (var db = new DatabaseContext())
-                {
-                    var thisSession = db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
-                    var foundCategoryInDb = db.Categories
-                        .SingleOrDefault(x => x.CategoryName.Equals(CategorySelected));
-
-                    var foundAimInDb = db.Aims
-                        .SingleOrDefault(x => x.AimName.Equals(AimSelected));
-
-                    lastMoneyRecord.Aim = foundAimInDb;
-                    lastMoneyRecord.Category = foundCategoryInDb;
-                    lastMoneyRecord.Owner = Owner;
-                    //Workaround EntityFramework. Original Object causes exception!
-                    var copy = (Money)lastMoneyRecord.DeepCopy();
-                    thisSession.Money.Add(copy);
-                    db.SaveChanges();
-
-                }
                 ReloadData();
             }
             
