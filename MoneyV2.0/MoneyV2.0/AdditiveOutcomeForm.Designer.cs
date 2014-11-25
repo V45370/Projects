@@ -32,7 +32,7 @@
             this.CategoryLabel = new System.Windows.Forms.Label();
             this.AimComboBox = new System.Windows.Forms.ComboBox();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
-            this.MoneyFormSaveBtn = new System.Windows.Forms.Button();
+            this.AdditiveOutcomeSaveBtn = new System.Windows.Forms.Button();
             this.AmountTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -73,17 +73,17 @@
             this.CategoryComboBox.TabIndex = 10;
             this.CategoryComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
-            // MoneyFormSaveBtn
+            // AdditiveOutcomeSaveBtn
             // 
-            this.MoneyFormSaveBtn.BackColor = System.Drawing.Color.LightSalmon;
-            this.MoneyFormSaveBtn.Location = new System.Drawing.Point(258, 137);
-            this.MoneyFormSaveBtn.Name = "MoneyFormSaveBtn";
-            this.MoneyFormSaveBtn.Size = new System.Drawing.Size(76, 54);
-            this.MoneyFormSaveBtn.TabIndex = 14;
-            this.MoneyFormSaveBtn.Text = "Запис";
-            this.MoneyFormSaveBtn.UseVisualStyleBackColor = false;
-            this.MoneyFormSaveBtn.Click += new System.EventHandler(this.MoneyFormSaveBtn_Click);
-            this.MoneyFormSaveBtn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.AdditiveOutcomeSaveBtn.BackColor = System.Drawing.Color.PaleGreen;
+            this.AdditiveOutcomeSaveBtn.Location = new System.Drawing.Point(258, 137);
+            this.AdditiveOutcomeSaveBtn.Name = "AdditiveOutcomeSaveBtn";
+            this.AdditiveOutcomeSaveBtn.Size = new System.Drawing.Size(76, 54);
+            this.AdditiveOutcomeSaveBtn.TabIndex = 14;
+            this.AdditiveOutcomeSaveBtn.Text = "Добави";
+            this.AdditiveOutcomeSaveBtn.UseVisualStyleBackColor = false;
+            this.AdditiveOutcomeSaveBtn.Click += new System.EventHandler(this.AdditiveOutcomeSaveBtn_Click);
+            this.AdditiveOutcomeSaveBtn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // AmountTB
             // 
@@ -109,7 +109,7 @@
             this.ClientSize = new System.Drawing.Size(363, 210);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AmountTB);
-            this.Controls.Add(this.MoneyFormSaveBtn);
+            this.Controls.Add(this.AdditiveOutcomeSaveBtn);
             this.Controls.Add(this.AimLabel);
             this.Controls.Add(this.CategoryLabel);
             this.Controls.Add(this.AimComboBox);
@@ -127,7 +127,7 @@
         private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.ComboBox AimComboBox;
         private System.Windows.Forms.ComboBox CategoryComboBox;
-        private System.Windows.Forms.Button MoneyFormSaveBtn;
+        private System.Windows.Forms.Button AdditiveOutcomeSaveBtn;
         private System.Windows.Forms.TextBox AmountTB;
         private System.Windows.Forms.Label label1;
     }

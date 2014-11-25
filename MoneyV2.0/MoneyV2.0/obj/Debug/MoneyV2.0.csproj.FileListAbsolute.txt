@@ -32,3 +32,4 @@ F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.PasswordForm.
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.Properties.Resources.resources
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.csproj.GenerateResource.Cache
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.csprojResolveAssemblyReference.cache
+F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.AdditiveOutcomeForm.resources

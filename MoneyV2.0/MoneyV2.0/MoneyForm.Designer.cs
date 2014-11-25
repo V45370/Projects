@@ -58,14 +58,14 @@ namespace MoneyV2._0
             this.NextDateBtn = new System.Windows.Forms.Button();
             this.PreviusDateBtn = new System.Windows.Forms.Button();
             this.AdditiveListView = new System.Windows.Forms.ListView();
+            this.CategoryColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AimColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AmountColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.AdditiveAmountLabel = new System.Windows.Forms.Label();
             this.AdditiveAmountTB = new System.Windows.Forms.TextBox();
             this.TotalLabel = new System.Windows.Forms.Label();
             this.TotalTB = new System.Windows.Forms.TextBox();
             this.AdditiveOutcomeBtn = new System.Windows.Forms.Button();
-            this.CategoryColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.AimColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.AmountColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // AmountLabel
@@ -324,11 +324,27 @@ namespace MoneyV2._0
             this.CategoryColumn,
             this.AimColumn,
             this.AmountColumn});
-            this.AdditiveListView.Location = new System.Drawing.Point(331, 57);
+            this.AdditiveListView.Location = new System.Drawing.Point(319, 57);
             this.AdditiveListView.Name = "AdditiveListView";
-            this.AdditiveListView.Size = new System.Drawing.Size(195, 236);
+            this.AdditiveListView.Size = new System.Drawing.Size(207, 236);
             this.AdditiveListView.TabIndex = 51;
             this.AdditiveListView.UseCompatibleStateImageBehavior = false;
+            this.AdditiveListView.View = System.Windows.Forms.View.Details;
+            // 
+            // CategoryColumn
+            // 
+            this.CategoryColumn.Text = "Вид";
+            this.CategoryColumn.Width = 80;
+            // 
+            // AimColumn
+            // 
+            this.AimColumn.Text = "Цел";
+            this.AimColumn.Width = 80;
+            // 
+            // AmountColumn
+            // 
+            this.AmountColumn.Text = "Сума";
+            this.AmountColumn.Width = 40;
             // 
             // AdditiveAmountLabel
             // 
@@ -347,6 +363,7 @@ namespace MoneyV2._0
             this.AdditiveAmountTB.Size = new System.Drawing.Size(74, 20);
             this.AdditiveAmountTB.TabIndex = 53;
             this.AdditiveAmountTB.Text = "0";
+            this.AdditiveAmountTB.TextChanged += new System.EventHandler(this.AdditiveAmountTB_TextChanged);
             // 
             // TotalLabel
             // 
@@ -367,28 +384,13 @@ namespace MoneyV2._0
             // 
             // AdditiveOutcomeBtn
             // 
-            this.AdditiveOutcomeBtn.Location = new System.Drawing.Point(331, 299);
+            this.AdditiveOutcomeBtn.Location = new System.Drawing.Point(319, 296);
             this.AdditiveOutcomeBtn.Name = "AdditiveOutcomeBtn";
-            this.AdditiveOutcomeBtn.Size = new System.Drawing.Size(195, 50);
+            this.AdditiveOutcomeBtn.Size = new System.Drawing.Size(207, 50);
             this.AdditiveOutcomeBtn.TabIndex = 56;
             this.AdditiveOutcomeBtn.Text = "Допълнителна сума";
             this.AdditiveOutcomeBtn.UseVisualStyleBackColor = true;
             this.AdditiveOutcomeBtn.Click += new System.EventHandler(this.AdditiveOutcomeBtn_Click);
-            // 
-            // CategoryColumn
-            // 
-            this.CategoryColumn.Text = "Вид";
-            this.CategoryColumn.Width = 80;
-            // 
-            // AimColumn
-            // 
-            this.AimColumn.Text = "Цел";
-            this.AimColumn.Width = 80;
-            // 
-            // AmountColumn
-            // 
-            this.AmountColumn.Text = "Сума";
-            this.AmountColumn.Width = 40;
             // 
             // MoneyForm
             // 
@@ -463,14 +465,14 @@ namespace MoneyV2._0
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Button NextDateBtn;
         private System.Windows.Forms.Button PreviusDateBtn;
-        private System.Windows.Forms.ListView AdditiveListView;
         private System.Windows.Forms.ColumnHeader CategoryColumn;
         private System.Windows.Forms.ColumnHeader AimColumn;
         private System.Windows.Forms.ColumnHeader AmountColumn;
         private System.Windows.Forms.Label AdditiveAmountLabel;
-        private System.Windows.Forms.TextBox AdditiveAmountTB;
         private System.Windows.Forms.Label TotalLabel;
         private System.Windows.Forms.TextBox TotalTB;
         private System.Windows.Forms.Button AdditiveOutcomeBtn;
+        public System.Windows.Forms.ListView AdditiveListView;
+        public System.Windows.Forms.TextBox AdditiveAmountTB;
     }
 }

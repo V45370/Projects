@@ -16,12 +16,13 @@ namespace MoneyV2._0
     {
         private bool existingAimValue = false;
         private bool existingCategoryValue = false;
+        private MoneyForm parent;
         public AdditiveOutcomeForm(MoneyForm _parent)
         {
             InitializeComponent();
             ReloadData();
             ComboboxesAdjustements();
-            var parent = _parent;
+            parent = _parent;
         }
         private void Control_KeyUp(object sender, KeyEventArgs e)
         {
@@ -33,24 +34,18 @@ namespace MoneyV2._0
             {
                 ValidateCategoryCombobox();
                 ValidateAimCombobox();
-                var button = (Button)sender;
-                if(button.Name == MoneyFormSaveBtn.Name)
-                {
-                    SaveChangesAndClose();
-                }
                 this.SelectNextControl((Control)sender, true, true, true, true);
             }
 
         }
         private void SaveChangesAndClose()
         {
-            using(var db = new DatabaseContext())
-            {
-                var selectedCategory = db.Categories.SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.Text));
-                var selectedAim = db.Aims.SingleOrDefault(x=>x.AimName.Equals(this.AimComboBox.Text));
-                double amount = double.Parse(this.AmountTB.Text);
-                var outcome = new Money(selectedCategory, selectedAim, amount);
-            }
+            var item = new string[] { 
+                        CategoryComboBox.Text,
+                        AimComboBox.Text,
+                        AmountTB.Text 
+                        };
+            parent.additiveItems.Add(item);
             
             this.Close();
         }
@@ -93,9 +88,9 @@ namespace MoneyV2._0
 
         }
 
-        private void MoneyFormSaveBtn_Click(object sender, EventArgs e)
+        private void AdditiveOutcomeSaveBtn_Click(object sender, EventArgs e)
         {
-
+            SaveChangesAndClose();
         }
 
         private void ValidateCategoryCombobox()

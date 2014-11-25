@@ -11,7 +11,7 @@ namespace MoneyV2._0
 {
     public partial class MoneyForm : Form
     {
-        public List<Money> additiveMoney = new List<Money>();
+        public List<string[]> additiveItems = new List<string[]>();
         private bool isCurrentCategoryIncome = false;
         public bool isNewMoneyCategoryIncome=false; // used in CategoryForm when picking
         private bool isCategorySelectedIncome = false;
@@ -255,14 +255,14 @@ namespace MoneyV2._0
                 var deepCopy = (Money)moneyRecord.DeepCopy();
                 thisSession.Money.Add(deepCopy);
 
-                if(additiveMoney.Count!=0)
-                {
-                    foreach (var money in additiveMoney)
-                    {
-                        var copy = money.DeepCopy();
-                        thisSession.Money.Add(copy);
-                    }
-                }                
+                //if(additiveItems.Count!=0)
+                //{
+                //    foreach (var money in additiveItems)
+                //    {
+                //        var copy = money.DeepCopy();
+                //        thisSession.Money.Add(copy);
+                //    }
+                //}                
                 db.SaveChanges();
 
                 parent.MoneyFormWasSaved = true;
@@ -306,7 +306,24 @@ namespace MoneyV2._0
         {
             var additiveOutcomeForm = new AdditiveOutcomeForm(this);
             additiveOutcomeForm.ShowDialog(this);
+            ReloadAdditiveListViewAndAdditiveAmount();
 
+        }
+        private void ReloadAdditiveListViewAndAdditiveAmount()
+        {
+            AdditiveListView.Items.Clear();
+            double additiveamount=0;
+            foreach (var item in additiveItems)
+            {
+                AdditiveListView.Items.Add(new ListViewItem(item));
+                additiveamount += double.Parse(item[2]);
+            }
+            AdditiveAmountTB.Text = additiveamount.ToString();
+        }
+
+        private void AdditiveAmountTB_TextChanged(object sender, EventArgs e)
+        {
+            ChangeAmountsOnTextChanged();
         }
     }
 }
