@@ -10,11 +10,11 @@ namespace MoneyV2._0.Models
     {
         public Session()
         {
-            this.Money = new List<Money>();
+            this.Moneys = new List<Money>();
         }
 
         public int SessionId { get; set; }
         public DateTime Date { get; set; }
-        public virtual ICollection<Money> Money { get; set; }
+        public virtual ICollection<Money> Moneys { get; set; }
     }
 }

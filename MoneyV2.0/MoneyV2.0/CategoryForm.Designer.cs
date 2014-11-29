@@ -39,7 +39,7 @@
             // AddCategoryBtn
             // 
             this.AddCategoryBtn.BackColor = System.Drawing.Color.PaleGreen;
-            this.AddCategoryBtn.Location = new System.Drawing.Point(63, 93);
+            this.AddCategoryBtn.Location = new System.Drawing.Point(83, 93);
             this.AddCategoryBtn.Name = "AddCategoryBtn";
             this.AddCategoryBtn.Size = new System.Drawing.Size(105, 28);
             this.AddCategoryBtn.TabIndex = 0;
@@ -52,9 +52,9 @@
             // 
             this.panel1.Controls.Add(this.OutcomeRB);
             this.panel1.Controls.Add(this.IncomeRB);
-            this.panel1.Location = new System.Drawing.Point(45, 24);
+            this.panel1.Location = new System.Drawing.Point(32, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(123, 49);
+            this.panel1.Size = new System.Drawing.Size(103, 49);
             this.panel1.TabIndex = 1;
             // 
             // OutcomeRB
@@ -72,7 +72,8 @@
             // IncomeRB
             // 
             this.IncomeRB.AutoSize = true;
-            this.IncomeRB.Location = new System.Drawing.Point(38, 3);
+            this.IncomeRB.Checked = true;
+            this.IncomeRB.Location = new System.Drawing.Point(38, 4);
             this.IncomeRB.Name = "IncomeRB";
             this.IncomeRB.Size = new System.Drawing.Size(62, 17);
             this.IncomeRB.TabIndex = 0;
@@ -84,7 +85,8 @@
             // IsBankCB
             // 
             this.IsBankCB.AutoSize = true;
-            this.IsBankCB.Location = new System.Drawing.Point(174, 51);
+            this.IsBankCB.Enabled = false;
+            this.IsBankCB.Location = new System.Drawing.Point(164, 52);
             this.IsBankCB.Name = "IsBankCB";
             this.IsBankCB.Size = new System.Drawing.Size(71, 17);
             this.IsBankCB.TabIndex = 2;
@@ -96,12 +98,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(273, 133);
+            this.ClientSize = new System.Drawing.Size(279, 133);
             this.Controls.Add(this.IsBankCB);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.AddCategoryBtn);
             this.Name = "CategoryForm";
-            this.Text = "Приход или Разход";
+            this.Text = "Новата Категория е?";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

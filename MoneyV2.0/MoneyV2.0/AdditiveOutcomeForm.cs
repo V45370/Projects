@@ -62,7 +62,7 @@ namespace MoneyV2._0
                 foreach (var category in categories)
                 {
                     //Load only Outcomes
-                    if (!category.isIncome)
+                    if (!category.isIncome && !category.isForBank)
                     {
                         categoryList.Add(category.CategoryName);
                     }
@@ -94,7 +94,7 @@ namespace MoneyV2._0
 
         private void AdditiveOutcomeSaveBtn_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(AmountTB.Text) || int.Parse(AmountTB.Text)==0) 
+            if (String.IsNullOrEmpty(AmountTB.Text) || double.Parse(AmountTB.Text)==0) 
             {
                 MessageBox.Show("Въведете сума");
             }

@@ -57,12 +57,13 @@
             this.NextDateBtn = new System.Windows.Forms.Button();
             this.PreviusDateBtn = new System.Windows.Forms.Button();
             this.ThisComputerCheckBox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // OpenHistoryForm
             // 
-            this.OpenHistoryForm.Location = new System.Drawing.Point(758, 147);
+            this.OpenHistoryForm.Location = new System.Drawing.Point(764, 186);
             this.OpenHistoryForm.Name = "OpenHistoryForm";
             this.OpenHistoryForm.Size = new System.Drawing.Size(112, 57);
             this.OpenHistoryForm.TabIndex = 1;
@@ -75,7 +76,7 @@
             this.OpenMoneyFormBtn.BackColor = System.Drawing.SystemColors.Window;
             this.OpenMoneyFormBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OpenMoneyFormBtn.BackgroundImage")));
             this.OpenMoneyFormBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.OpenMoneyFormBtn.Location = new System.Drawing.Point(758, 76);
+            this.OpenMoneyFormBtn.Location = new System.Drawing.Point(764, 115);
             this.OpenMoneyFormBtn.Name = "OpenMoneyFormBtn";
             this.OpenMoneyFormBtn.Size = new System.Drawing.Size(112, 65);
             this.OpenMoneyFormBtn.TabIndex = 2;
@@ -95,7 +96,7 @@
             this.Qty2Column,
             this.Qty1Column,
             this.Total});
-            this.CashDeskListView.Location = new System.Drawing.Point(32, 457);
+            this.CashDeskListView.Location = new System.Drawing.Point(32, 464);
             this.CashDeskListView.Name = "CashDeskListView";
             this.CashDeskListView.Size = new System.Drawing.Size(504, 97);
             this.CashDeskListView.TabIndex = 3;
@@ -154,9 +155,10 @@
             this.AmountColumn,
             this.OwnerColumn,
             this.NoteColumn});
-            this.SessionView.Location = new System.Drawing.Point(32, 76);
+            this.SessionView.FullRowSelect = true;
+            this.SessionView.Location = new System.Drawing.Point(32, 115);
             this.SessionView.Name = "SessionView";
-            this.SessionView.Size = new System.Drawing.Size(707, 359);
+            this.SessionView.Size = new System.Drawing.Size(726, 330);
             this.SessionView.TabIndex = 4;
             this.SessionView.UseCompatibleStateImageBehavior = false;
             this.SessionView.View = System.Windows.Forms.View.Details;
@@ -164,11 +166,11 @@
             // NumberColumn
             // 
             this.NumberColumn.Text = "№";
-            this.NumberColumn.Width = 30;
+            this.NumberColumn.Width = 43;
             // 
             // DateColumn
             // 
-            this.DateColumn.Text = "Дата";
+            this.DateColumn.Text = "За Дата";
             this.DateColumn.Width = 110;
             // 
             // CategoryColumn
@@ -187,7 +189,7 @@
             // 
             // OwnerColumn
             // 
-            this.OwnerColumn.Text = "Компютър";
+            this.OwnerColumn.Text = "От Компютър";
             this.OwnerColumn.Width = 100;
             // 
             // NoteColumn
@@ -202,7 +204,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(882, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(888, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -235,7 +237,7 @@
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(274, 37);
+            this.dateTimePicker.Location = new System.Drawing.Point(139, 64);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(149, 20);
             this.dateTimePicker.TabIndex = 6;
@@ -244,9 +246,9 @@
             // 
             this.NextDateBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("NextDateBtn.BackgroundImage")));
             this.NextDateBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.NextDateBtn.Location = new System.Drawing.Point(462, 34);
+            this.NextDateBtn.Location = new System.Drawing.Point(304, 48);
             this.NextDateBtn.Name = "NextDateBtn";
-            this.NextDateBtn.Size = new System.Drawing.Size(30, 31);
+            this.NextDateBtn.Size = new System.Drawing.Size(43, 44);
             this.NextDateBtn.TabIndex = 33;
             this.NextDateBtn.UseVisualStyleBackColor = true;
             this.NextDateBtn.Click += new System.EventHandler(this.NextDateBtn_Click);
@@ -255,9 +257,9 @@
             // 
             this.PreviusDateBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PreviusDateBtn.BackgroundImage")));
             this.PreviusDateBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PreviusDateBtn.Location = new System.Drawing.Point(208, 34);
+            this.PreviusDateBtn.Location = new System.Drawing.Point(78, 48);
             this.PreviusDateBtn.Name = "PreviusDateBtn";
-            this.PreviusDateBtn.Size = new System.Drawing.Size(30, 31);
+            this.PreviusDateBtn.Size = new System.Drawing.Size(43, 44);
             this.PreviusDateBtn.TabIndex = 34;
             this.PreviusDateBtn.UseVisualStyleBackColor = true;
             this.PreviusDateBtn.Click += new System.EventHandler(this.PreviusDateBtn_Click);
@@ -265,20 +267,30 @@
             // ThisComputerCheckBox
             // 
             this.ThisComputerCheckBox.AutoSize = true;
-            this.ThisComputerCheckBox.Location = new System.Drawing.Point(551, 39);
+            this.ThisComputerCheckBox.Location = new System.Drawing.Point(395, 77);
             this.ThisComputerCheckBox.Name = "ThisComputerCheckBox";
-            this.ThisComputerCheckBox.Size = new System.Drawing.Size(98, 17);
+            this.ThisComputerCheckBox.Size = new System.Drawing.Size(190, 17);
             this.ThisComputerCheckBox.TabIndex = 35;
-            this.ThisComputerCheckBox.Text = "Текуща сесия";
+            this.ThisComputerCheckBox.Text = "Покажи само от този компютър";
             this.ThisComputerCheckBox.UseVisualStyleBackColor = true;
             this.ThisComputerCheckBox.CheckedChanged += new System.EventHandler(this.ThisComputerCheckBox_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(167, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 13);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "Дата на сесия";
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(882, 555);
+            this.ClientSize = new System.Drawing.Size(888, 589);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.ThisComputerCheckBox);
             this.Controls.Add(this.PreviusDateBtn);
             this.Controls.Add(this.NextDateBtn);
@@ -329,6 +341,7 @@
         private System.Windows.Forms.Button NextDateBtn;
         private System.Windows.Forms.Button PreviusDateBtn;
         private System.Windows.Forms.CheckBox ThisComputerCheckBox;
+        private System.Windows.Forms.Label label1;
     }
 }
 

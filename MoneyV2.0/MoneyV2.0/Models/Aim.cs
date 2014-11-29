@@ -8,11 +8,11 @@ namespace MoneyV2._0.Models
     {
         public Aim()
         {
-            this.Money = new List<Money>();
+            this.Moneys = new List<Money>();
         }
         public int AimId { get; set; }
         public string AimName { get; set; }
-        public virtual Category Categories { get; set; }
-        public virtual ICollection<Money> Money { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual ICollection<Money> Moneys { get; set; }
     }
 }

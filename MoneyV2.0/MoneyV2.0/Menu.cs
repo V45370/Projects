@@ -15,11 +15,6 @@ namespace MoneyV2._0
         public Session session = new Session();
         private bool onlyThisComputer = false;
         private bool SessionIsEmpty = false;
-       // private bool doesSessionExists = false;
-        //public Money lastMoneyRecord = new Money();
-        //public string CategorySelected;
-        //public string AimSelected;
-        //public string Owner;
         public bool MoneyFormWasSaved = false;
         public DateTime today = DateTime.Today;
         private DateTime pickedDate;
@@ -30,6 +25,7 @@ namespace MoneyV2._0
 
         private void Menu_Load(object sender, EventArgs e)
         {
+            pickedDate = dateTimePicker.Value.Date;
             //Check if Session exists in database
             using (var db = new DatabaseContext())
             {
@@ -41,7 +37,7 @@ namespace MoneyV2._0
                 }
 
             }
-            ReloadData();
+            LoadData();
         }
 
         private void OpenHistoryForm_Click(object sender, EventArgs e)
@@ -61,22 +57,28 @@ namespace MoneyV2._0
             }
             
         }
+        public void LoadData()
+        {
+            LoadCashDeskView();
+            LoadSessionView(today);
+        }
         public void ReloadData()
         {
-
-            LoadCashDeskView();
+            ReloadCashDeskView();
             ReloadSessionView();
         }
+        private void ReloadCashDeskView() 
+        {
+            CashDeskListView.Items.Clear();
+            LoadCashDeskView();
+        }
+
         private void ReloadSessionView()
         {
-            ClearSessionView();
-            LoadSessionView();
-        }
-        private void ClearSessionView()
-        {
             SessionView.Items.Clear();
+            LoadSessionView(pickedDate);
         }
-        private void LoadSessionView()
+        private void LoadSessionView(DateTime date)
         {
             using (var db = new DatabaseContext())
             {
@@ -85,9 +87,10 @@ namespace MoneyV2._0
                 {
                     moneyInCurrentSession = (from a in db.Money
                                                  where a.Owner == Environment.MachineName
-                                                 where a.Session.Date == pickedDate                                                 
+                                                 where a.Session.Date == date                                                 
                                                  select new
                                                  {
+                                                     Id = a.MoneyId,
                                                      Date = a.Date,
                                                      Category = a.Category.CategoryName,
                                                      Aim = a.Aim.AimName,
@@ -100,9 +103,10 @@ namespace MoneyV2._0
                 else
                 {
                     moneyInCurrentSession = (from a in db.Money
-                                                 where a.Session.Date == pickedDate
+                                                 where a.Session.Date == date
                                                  select new
                                                  {
+                                                     Id = a.MoneyId,
                                                      Date = a.Date,
                                                      Category = a.Category.CategoryName,
                                                      Aim = a.Aim.AimName,
@@ -117,11 +121,10 @@ namespace MoneyV2._0
                 if(moneyInCurrentSession.Count!=0)
                 {
                     List<string[]> itemValues = new List<string[]>();
-                    int counter = 1;
                     foreach (var item in moneyInCurrentSession)
                     {
                         itemValues.Add(new string[]{
-                            counter.ToString(),
+                            item.Id.ToString(),
                             item.Date.ToShortDateString(),
                             item.Category.ToString(),
                             item.Aim.ToString(),
@@ -129,7 +132,6 @@ namespace MoneyV2._0
                             item.Owner,
                             item.Note
                         });
-                        counter++;
                     }
                     foreach (var item in itemValues)
                     {
@@ -142,15 +144,11 @@ namespace MoneyV2._0
         }
         private void LoadCashDeskView()
         {
-            if (CashDeskListView.Items.Count > 0)
-            {
-                CashDeskListView.Items.RemoveAt(0);
-            }
             using (var db = new MoneyContext())
             {
                 //extract Sum of all Incomes and Sum of all Outcomes, they are separated in cashDesk[0] and cashDesk[1]
                 var cashDesk = (from a in db.Money
-                                group a by a.Category into b
+                                group a by a.Category.isIncome into b
                                 select new
                                 {
                                     Quantity1 = b.Sum(x => x.Quantity1),
@@ -160,22 +158,24 @@ namespace MoneyV2._0
                                     Quantity20 = b.Sum(x => x.Quantity20),
                                     Quantity50 = b.Sum(x => x.Quantity50),
                                     Quantity100 = b.Sum(x => x.Quantity100),
-                                    Amount = b.Sum(x => x.Amount),
+                                    BanknotiAmount = b.Sum(x => x.BanknotiAmount),
                                 }).ToList();
                 //throws exception if there isn't cashdesk money
-                if (cashDesk.Count != 0)
+                //Count needs to be 2 because cashdesk[1] is incomes and cashdesk[0] is outcomes
+                if (cashDesk.Count == 2)
                 {
                     string[] itemValues = new string[] 
-                                            {
-                                                (cashDesk[0].Quantity100-cashDesk[1].Quantity100).ToString(),
-                                                (cashDesk[0].Quantity50-cashDesk[1].Quantity50).ToString(),
-                                                (cashDesk[0].Quantity20-cashDesk[1].Quantity20).ToString(),
-                                                (cashDesk[0].Quantity10-cashDesk[1].Quantity10).ToString(),
-                                                (cashDesk[0].Quantity5-cashDesk[1].Quantity5).ToString(),
-                                                (cashDesk[0].Quantity2-cashDesk[1].Quantity2).ToString(),
-                                                (cashDesk[0].Quantity1-cashDesk[1].Quantity1).ToString(),
-                                                (cashDesk[0].Amount-cashDesk[1].Amount).ToString()
-                                            };
+                                        {
+                                            (cashDesk[1].Quantity100-cashDesk[0].Quantity100).ToString(),
+                                            (cashDesk[1].Quantity50-cashDesk[0].Quantity50).ToString(),
+                                            (cashDesk[1].Quantity20-cashDesk[0].Quantity20).ToString(),
+                                            (cashDesk[1].Quantity10-cashDesk[0].Quantity10).ToString(),
+                                            (cashDesk[1].Quantity5-cashDesk[0].Quantity5).ToString(),
+                                            (cashDesk[1].Quantity2-cashDesk[0].Quantity2).ToString(),
+                                            (cashDesk[1].Quantity1-cashDesk[0].Quantity1).ToString(),
+                                            (cashDesk[1].BanknotiAmount-cashDesk[0].BanknotiAmount).ToString()
+                                        };                    
+                   
                     this.CashDeskListView.Items.Add(new ListViewItem(itemValues));
                 }
             }
@@ -185,8 +185,7 @@ namespace MoneyV2._0
         {
             dateTimePicker.Value = dateTimePicker.Value.AddDays(1);
             pickedDate = dateTimePicker.Value.Date;
-            ClearSessionView();
-            LoadSessionView();
+            ReloadSessionView();
         }
 
         private void PreviusDateBtn_Click(object sender, EventArgs e)

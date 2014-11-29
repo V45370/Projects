@@ -21,6 +21,7 @@ namespace MoneyV2._0.Models
             this.Quantity100 = 0;
             this.Category = category;
             this.Aim = aim;
+            this.BanknotiAmount = 0;
             this.Amount = amount;
             this.Owner = Environment.MachineName;
         }
@@ -33,6 +34,7 @@ namespace MoneyV2._0.Models
         public int Quantity5 { get; set; }
         public int Quantity2 { get; set; }
         public int Quantity1 { get; set; }
+        public int BanknotiAmount { get; set; }
         public double Amount { get; set; }
         //public bool isFromCashDesk { get; set; }
         public DateTime Date { get; set; }
@@ -42,26 +44,26 @@ namespace MoneyV2._0.Models
         public virtual Aim Aim { get; set; }
         public virtual Session Session { get; set; }
 
-        public Money DeepCopy()
-        {
-            Money other = (Money)this.MemberwiseClone();
-            other.Quantity1 = Quantity1;
-            other.Quantity2 = Quantity2;
-            other.Quantity5 = Quantity5;
-            other.Quantity10 = Quantity10;
-            other.Quantity20 = Quantity20;
-            other.Quantity50 = Quantity50;
-            other.Quantity100 = Quantity100;
-            other.Amount = Amount;
-            other.Date = Date;
-            other.Note = String.Copy(Note);
-            other.Owner = String.Copy(Owner);
-            other.Category = Category;
-            other.Aim = Aim;
-            other.Session = Session;
+        //public Money DeepCopy()
+        //{
+        //    Money other = (Money)this.MemberwiseClone();
+        //    other.Quantity1 = Quantity1;
+        //    other.Quantity2 = Quantity2;
+        //    other.Quantity5 = Quantity5;
+        //    other.Quantity10 = Quantity10;
+        //    other.Quantity20 = Quantity20;
+        //    other.Quantity50 = Quantity50;
+        //    other.Quantity100 = Quantity100;
+        //    other.Amount = Amount;
+        //    other.Date = Date;
+        //    other.Note = String.Copy(Note);
+        //    other.Owner = String.Copy(Owner);
+        //    other.Category = Category;
+        //    other.Aim = Aim;
+        //    other.Session = Session;
 
-            return other;
-        }
+        //    return other;
+        //}
       
     }
 }

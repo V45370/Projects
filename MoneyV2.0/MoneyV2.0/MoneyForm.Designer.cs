@@ -35,7 +35,7 @@ namespace MoneyV2._0
             this.NoteLabel = new System.Windows.Forms.Label();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.AimComboBox = new System.Windows.Forms.ComboBox();
-            this.AmountTB = new System.Windows.Forms.TextBox();
+            this.BanknotiAmountTB = new System.Windows.Forms.TextBox();
             this.CategoryLabel = new System.Windows.Forms.Label();
             this.AimLabel = new System.Windows.Forms.Label();
             this.NoteTextBox = new System.Windows.Forms.RichTextBox();
@@ -105,31 +105,31 @@ namespace MoneyV2._0
             this.AimComboBox.TabIndex = 1;
             this.AimComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
-            // AmountTB
+            // BanknotiAmountTB
             // 
-            this.AmountTB.Location = new System.Drawing.Point(660, 223);
-            this.AmountTB.Name = "AmountTB";
-            this.AmountTB.ReadOnly = true;
-            this.AmountTB.Size = new System.Drawing.Size(76, 20);
-            this.AmountTB.TabIndex = 10;
-            this.AmountTB.TabStop = false;
-            this.AmountTB.Text = "0";
-            this.AmountTB.TextChanged += new System.EventHandler(this.OnTextChanged);
-            this.AmountTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.BanknotiAmountTB.Location = new System.Drawing.Point(660, 223);
+            this.BanknotiAmountTB.Name = "BanknotiAmountTB";
+            this.BanknotiAmountTB.ReadOnly = true;
+            this.BanknotiAmountTB.Size = new System.Drawing.Size(76, 20);
+            this.BanknotiAmountTB.TabIndex = 10;
+            this.BanknotiAmountTB.TabStop = false;
+            this.BanknotiAmountTB.Text = "0";
+            this.BanknotiAmountTB.TextChanged += new System.EventHandler(this.OnTextChanged);
+            this.BanknotiAmountTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // CategoryLabel
             // 
             this.CategoryLabel.AutoSize = true;
-            this.CategoryLabel.Location = new System.Drawing.Point(45, 90);
+            this.CategoryLabel.Location = new System.Drawing.Point(36, 90);
             this.CategoryLabel.Name = "CategoryLabel";
-            this.CategoryLabel.Size = new System.Drawing.Size(32, 13);
+            this.CategoryLabel.Size = new System.Drawing.Size(66, 13);
             this.CategoryLabel.TabIndex = 8;
-            this.CategoryLabel.Text = "Вид :";
+            this.CategoryLabel.Text = "Категория :";
             // 
             // AimLabel
             // 
             this.AimLabel.AutoSize = true;
-            this.AimLabel.Location = new System.Drawing.Point(44, 140);
+            this.AimLabel.Location = new System.Drawing.Point(69, 139);
             this.AimLabel.Name = "AimLabel";
             this.AimLabel.Size = new System.Drawing.Size(33, 13);
             this.AimLabel.TabIndex = 9;
@@ -427,7 +427,7 @@ namespace MoneyV2._0
             this.Controls.Add(this.NoteTextBox);
             this.Controls.Add(this.AimLabel);
             this.Controls.Add(this.CategoryLabel);
-            this.Controls.Add(this.AmountTB);
+            this.Controls.Add(this.BanknotiAmountTB);
             this.Controls.Add(this.AimComboBox);
             this.Controls.Add(this.CategoryComboBox);
             this.Controls.Add(this.NoteLabel);
@@ -446,7 +446,7 @@ namespace MoneyV2._0
         private System.Windows.Forms.Label NoteLabel;
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.ComboBox AimComboBox;
-        private System.Windows.Forms.TextBox AmountTB;
+        private System.Windows.Forms.TextBox BanknotiAmountTB;
         private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.Label AimLabel;
         private System.Windows.Forms.RichTextBox NoteTextBox;

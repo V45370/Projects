@@ -40,7 +40,7 @@
             // AimLabel
             // 
             this.AimLabel.AutoSize = true;
-            this.AimLabel.Location = new System.Drawing.Point(31, 84);
+            this.AimLabel.Location = new System.Drawing.Point(31, 74);
             this.AimLabel.Name = "AimLabel";
             this.AimLabel.Size = new System.Drawing.Size(33, 13);
             this.AimLabel.TabIndex = 13;
@@ -58,7 +58,7 @@
             // AimComboBox
             // 
             this.AimComboBox.FormattingEnabled = true;
-            this.AimComboBox.Location = new System.Drawing.Point(95, 81);
+            this.AimComboBox.Location = new System.Drawing.Point(95, 71);
             this.AimComboBox.Name = "AimComboBox";
             this.AimComboBox.Size = new System.Drawing.Size(121, 21);
             this.AimComboBox.TabIndex = 2;
@@ -76,9 +76,9 @@
             // AdditiveOutcomeSaveBtn
             // 
             this.AdditiveOutcomeSaveBtn.BackColor = System.Drawing.Color.PaleGreen;
-            this.AdditiveOutcomeSaveBtn.Location = new System.Drawing.Point(258, 137);
+            this.AdditiveOutcomeSaveBtn.Location = new System.Drawing.Point(95, 162);
             this.AdditiveOutcomeSaveBtn.Name = "AdditiveOutcomeSaveBtn";
-            this.AdditiveOutcomeSaveBtn.Size = new System.Drawing.Size(76, 54);
+            this.AdditiveOutcomeSaveBtn.Size = new System.Drawing.Size(94, 27);
             this.AdditiveOutcomeSaveBtn.TabIndex = 4;
             this.AdditiveOutcomeSaveBtn.Text = "Добави";
             this.AdditiveOutcomeSaveBtn.UseVisualStyleBackColor = false;
@@ -87,7 +87,7 @@
             // 
             // AmountTB
             // 
-            this.AmountTB.Location = new System.Drawing.Point(95, 137);
+            this.AmountTB.Location = new System.Drawing.Point(95, 111);
             this.AmountTB.Name = "AmountTB";
             this.AmountTB.Size = new System.Drawing.Size(92, 20);
             this.AmountTB.TabIndex = 3;
@@ -97,7 +97,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 140);
+            this.label1.Location = new System.Drawing.Point(32, 114);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 16;
@@ -107,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 210);
+            this.ClientSize = new System.Drawing.Size(270, 207);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AmountTB);
             this.Controls.Add(this.AdditiveOutcomeSaveBtn);

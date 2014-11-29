@@ -36,14 +36,14 @@ namespace MoneyV2._0
 
         private void ChangeAmountsOnTextChanged()
         {
-            this.AmountTB.Text = (int.Parse(Qty100TB.Text) * 100
+            this.BanknotiAmountTB.Text = (int.Parse(Qty100TB.Text) * 100
                 + int.Parse(Qty50TB.Text) * 50
                 + int.Parse(Qty20TB.Text) * 20
                 + int.Parse(Qty10TB.Text) * 10
                 + int.Parse(Qty5TB.Text) * 5
                 + int.Parse(Qty2TB.Text) * 2
                 + int.Parse(Qty1TB.Text) * 1).ToString();
-            this.TotalTB.Text = (double.Parse(AmountTB.Text) + double.Parse(AdditiveAmountTB.Text)).ToString();
+            this.TotalTB.Text = (double.Parse(BanknotiAmountTB.Text) + double.Parse(AdditiveAmountTB.Text)).ToString();
         }
 
         private void ValidateCategoryCombobox()
@@ -202,18 +202,25 @@ namespace MoneyV2._0
                 AimComboBox.DataSource = aimslist;
             }
 
-            TextBoxesChangeColor();
+            TextBoxesChangeColorAndLockAdditiveBtn();
         }
 
-        private void TextBoxesChangeColor()
+        private void TextBoxesChangeColorAndLockAdditiveBtn()
         {
             if (isCurrentCategoryIncome)
             {
                 CategoryComboBox.BackColor = Color.PaleGreen;
+                this.AdditiveOutcomeBtn.Enabled = true;
+                this.AdditiveListView.Enabled = true;
             }
             else
             {
                 CategoryComboBox.BackColor = Color.LightSalmon;
+                this.AdditiveOutcomeBtn.Enabled = false;
+                this.AdditiveListView.Enabled = false;
+                this.additiveItems.Clear();
+                this.AdditiveListView.Items.Clear();
+                this.AdditiveAmountTB.Text = "0";
             }
                 
         }
@@ -248,12 +255,13 @@ namespace MoneyV2._0
             LoadData();            
         }
         private void AddMoneyToSession()
+        
         {
             using (var db = new DatabaseContext())
             {
                 var moneyRecord = new Money();
                 var thisSession = db.Sessions.SingleOrDefault(x => x.Date.Equals(parent.today));
-                moneyRecord.Amount = double.Parse(this.AmountTB.Text);
+                moneyRecord.Amount = double.Parse(this.TotalTB.Text);
                 moneyRecord.Date = dateTimePicker.Value.Date;
                 moneyRecord.Note = NoteTextBox.Text;
                 moneyRecord.Quantity1 = int.Parse(Qty1TB.Text);
@@ -263,12 +271,18 @@ namespace MoneyV2._0
                 moneyRecord.Quantity20 = int.Parse(Qty20TB.Text);
                 moneyRecord.Quantity50 = int.Parse(Qty50TB.Text);
                 moneyRecord.Quantity100 = int.Parse(Qty100TB.Text);
-                moneyRecord.Category = db.Categories.SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.Text));
-                moneyRecord.Aim = db.Aims.SingleOrDefault(x => x.AimName.Equals(this.AimComboBox.Text));
+                moneyRecord.BanknotiAmount = int.Parse(BanknotiAmountTB.Text);
+                Category foundCategory = db.Categories.SingleOrDefault(x => x.CategoryName.Equals(this.CategoryComboBox.Text));
+                moneyRecord.Category = foundCategory;
+                Aim foundAim = (from a in db.Categories
+                                from b in a.Aims
+                                where b.AimName == AimComboBox.Text
+                                select b).FirstOrDefault();
+                moneyRecord.Aim = foundAim;
                 moneyRecord.Owner = Environment.MachineName;
                 //Workaround EntityFramework. Original Object causes exception!
-                var deepCopy = (Money)moneyRecord.DeepCopy();
-                thisSession.Money.Add(deepCopy);
+                //var deepCopy = (Money)moneyRecord.DeepCopy();
+                thisSession.Moneys.Add(moneyRecord);
 
                 if(additiveItems.Count!=0)
                 {
@@ -277,12 +291,16 @@ namespace MoneyV2._0
                     {
                         string categoryName = item[0];
                         string aimName = item[1];
-                        var category = db.Categories.SingleOrDefault(x => x.CategoryName.Equals(categoryName));
-                        var aim = db.Aims.SingleOrDefault(x => x.AimName.Equals(aimName));
-                        outcome = new Money(category, aim, double.Parse(item[2]));
+                        double amount = double.Parse(item[2]);
+                        Category category = db.Categories.SingleOrDefault(x => x.CategoryName.Equals(categoryName));
+                        Aim aim = (from a in db.Categories
+                                   from b in a.Aims
+                                   where b.AimName == aimName
+                                   select b).FirstOrDefault();
+                        outcome = new Money(category, aim, amount);
                         outcome.Date = dateTimePicker.Value.Date;
-                        outcome.Note = NoteTextBox.Text;
-                        thisSession.Money.Add(outcome);
+                        outcome.Note = "Допълнителна сума";
+                        thisSession.Moneys.Add(outcome);
                     }
                 }                
                 db.SaveChanges();
@@ -306,7 +324,7 @@ namespace MoneyV2._0
             }
             else
             {
-                if(textBox.Name!=AmountTB.Name)
+                if(textBox.Name!=BanknotiAmountTB.Name)
                 {
                     ChangeAmountsOnTextChanged();
                 }
@@ -316,12 +334,12 @@ namespace MoneyV2._0
 
         private void NextDateBtn_Click(object sender, EventArgs e)
         {
-           dateTimePicker.Value = dateTimePicker.Value.AddDays(1);
+           this.dateTimePicker.Value = dateTimePicker.Value.AddDays(1);
         }
 
         private void PreviusDateBtn_Click(object sender, EventArgs e)
         {
-            dateTimePicker.Value = dateTimePicker.Value.AddDays(-1);
+           this. dateTimePicker.Value = dateTimePicker.Value.AddDays(-1);
         }
 
         private void AdditiveOutcomeBtn_Click(object sender, EventArgs e)
@@ -338,7 +356,7 @@ namespace MoneyV2._0
             foreach (var item in additiveItems)
             {
                 AdditiveListView.Items.Add(new ListViewItem(item));
-                additiveamount += double.Parse(item[2]);
+                additiveamount +=double.Parse(item[2]);
             }
             AdditiveAmountTB.Text = additiveamount.ToString();
         }
