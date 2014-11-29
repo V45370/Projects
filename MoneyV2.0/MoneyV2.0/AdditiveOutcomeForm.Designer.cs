@@ -61,7 +61,7 @@
             this.AimComboBox.Location = new System.Drawing.Point(95, 81);
             this.AimComboBox.Name = "AimComboBox";
             this.AimComboBox.Size = new System.Drawing.Size(121, 21);
-            this.AimComboBox.TabIndex = 11;
+            this.AimComboBox.TabIndex = 2;
             this.AimComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // CategoryComboBox
@@ -70,7 +70,7 @@
             this.CategoryComboBox.Location = new System.Drawing.Point(95, 31);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(121, 21);
-            this.CategoryComboBox.TabIndex = 10;
+            this.CategoryComboBox.TabIndex = 1;
             this.CategoryComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // AdditiveOutcomeSaveBtn
@@ -79,7 +79,7 @@
             this.AdditiveOutcomeSaveBtn.Location = new System.Drawing.Point(258, 137);
             this.AdditiveOutcomeSaveBtn.Name = "AdditiveOutcomeSaveBtn";
             this.AdditiveOutcomeSaveBtn.Size = new System.Drawing.Size(76, 54);
-            this.AdditiveOutcomeSaveBtn.TabIndex = 14;
+            this.AdditiveOutcomeSaveBtn.TabIndex = 4;
             this.AdditiveOutcomeSaveBtn.Text = "Добави";
             this.AdditiveOutcomeSaveBtn.UseVisualStyleBackColor = false;
             this.AdditiveOutcomeSaveBtn.Click += new System.EventHandler(this.AdditiveOutcomeSaveBtn_Click);
@@ -90,7 +90,8 @@
             this.AmountTB.Location = new System.Drawing.Point(95, 137);
             this.AmountTB.Name = "AmountTB";
             this.AmountTB.Size = new System.Drawing.Size(92, 20);
-            this.AmountTB.TabIndex = 15;
+            this.AmountTB.TabIndex = 3;
+            this.AmountTB.Text = "0";
             this.AmountTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // label1

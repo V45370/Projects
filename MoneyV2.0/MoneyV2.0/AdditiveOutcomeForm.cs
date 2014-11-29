@@ -26,15 +26,15 @@ namespace MoneyV2._0
         }
         private void Control_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
-            {
-                this.SelectNextControl((Control)sender, false, true, true, true);
-            }
-            else if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 ValidateCategoryCombobox();
                 ValidateAimCombobox();
                 this.SelectNextControl((Control)sender, true, true, true, true);
+                if (this.ActiveControl.Name == AdditiveOutcomeSaveBtn.Name)
+                {
+                    SaveChangesAndClose();
+                }
             }
 
         }
@@ -61,7 +61,11 @@ namespace MoneyV2._0
                 var categories = db.Categories;
                 foreach (var category in categories)
                 {
-                    categoryList.Add(category.CategoryName);
+                    //Load only Outcomes
+                    if (!category.isIncome)
+                    {
+                        categoryList.Add(category.CategoryName);
+                    }
                 }
                 this.CategoryComboBox.DataSource = categoryList;
 
@@ -90,7 +94,15 @@ namespace MoneyV2._0
 
         private void AdditiveOutcomeSaveBtn_Click(object sender, EventArgs e)
         {
-            SaveChangesAndClose();
+            if (String.IsNullOrEmpty(AmountTB.Text) || int.Parse(AmountTB.Text)==0) 
+            {
+                MessageBox.Show("Въведете сума");
+            }
+            else
+            {
+                SaveChangesAndClose();
+            }
+           
         }
 
         private void ValidateCategoryCombobox()
@@ -133,5 +145,6 @@ namespace MoneyV2._0
                 }
             }
         }
+
     }
 }

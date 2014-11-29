@@ -14,6 +14,7 @@ namespace MoneyV2._0.Models
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public bool isIncome { get; set; }
+        public bool isForBank { get; set; }
         public virtual ICollection<Money> Money { get; set; }
         public virtual ICollection<Aim> Aims { get; set; }
     }

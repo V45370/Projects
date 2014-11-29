@@ -27,21 +27,53 @@ namespace MoneyV2._0
         }
 
         private void SaveChangesAndClose()
-        {
+        {            
             if (IncomeRB.Checked)
 	        {
 		        parent.isNewMoneyCategoryIncome=true;
 	        }
             else
             {
+                if(IsBankCB.Checked == true)
+                {
+                    parent.isNewCategoryForBank = true;
+                }
                 parent.isNewMoneyCategoryIncome = false;
-            }            
+            }
+            parent.isNewCategorySaved = true;
             this.Close();
         }
 
         private void AddCategoryBtn_Click(object sender, EventArgs e)
         {
             SaveChangesAndClose();
+        }
+
+        private void IsBankCB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IsBankCB.Checked==true)
+            {
+                OutcomeRB.Checked = true;
+            }
+        }
+
+        private void IncomeRB_CheckedChanged(object sender, EventArgs e)
+        {
+            //Bank checkbox is only for outcomes
+            if(IncomeRB.Checked == true)
+            {
+                IsBankCB.Enabled = false;
+                if (IsBankCB.Checked)
+                {
+                    IsBankCB.Checked = false;
+                }
+            }
+            
+        }
+
+        private void OutcomeRB_CheckedChanged(object sender, EventArgs e)
+        {    
+             IsBankCB.Enabled = true;
         }
     }
 }

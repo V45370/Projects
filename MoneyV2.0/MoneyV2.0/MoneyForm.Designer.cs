@@ -362,6 +362,7 @@ namespace MoneyV2._0
             this.AdditiveAmountTB.ReadOnly = true;
             this.AdditiveAmountTB.Size = new System.Drawing.Size(74, 20);
             this.AdditiveAmountTB.TabIndex = 53;
+            this.AdditiveAmountTB.TabStop = false;
             this.AdditiveAmountTB.Text = "0";
             this.AdditiveAmountTB.TextChanged += new System.EventHandler(this.AdditiveAmountTB_TextChanged);
             // 
@@ -378,8 +379,10 @@ namespace MoneyV2._0
             // 
             this.TotalTB.Location = new System.Drawing.Point(662, 301);
             this.TotalTB.Name = "TotalTB";
+            this.TotalTB.ReadOnly = true;
             this.TotalTB.Size = new System.Drawing.Size(74, 20);
             this.TotalTB.TabIndex = 55;
+            this.TotalTB.TabStop = false;
             this.TotalTB.Text = "0";
             // 
             // AdditiveOutcomeBtn

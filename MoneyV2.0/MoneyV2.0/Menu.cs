@@ -162,20 +162,22 @@ namespace MoneyV2._0
                                     Quantity100 = b.Sum(x => x.Quantity100),
                                     Amount = b.Sum(x => x.Amount),
                                 }).ToList();
-                string[] itemValues = new string[] 
+                //throws exception if there isn't cashdesk money
+                if (cashDesk.Count != 0)
                 {
-                    (cashDesk[0].Quantity100-cashDesk[1].Quantity100).ToString(),
-                    (cashDesk[0].Quantity50-cashDesk[1].Quantity50).ToString(),
-                    (cashDesk[0].Quantity20-cashDesk[1].Quantity20).ToString(),
-                    (cashDesk[0].Quantity10-cashDesk[1].Quantity10).ToString(),
-                    (cashDesk[0].Quantity5-cashDesk[1].Quantity5).ToString(),
-                    (cashDesk[0].Quantity2-cashDesk[1].Quantity2).ToString(),
-                    (cashDesk[0].Quantity1-cashDesk[1].Quantity1).ToString(),
-                    (cashDesk[0].Amount-cashDesk[1].Amount).ToString()
-                };
-                
-                this.CashDeskListView.Items.Add(new ListViewItem(itemValues));
-
+                    string[] itemValues = new string[] 
+                                            {
+                                                (cashDesk[0].Quantity100-cashDesk[1].Quantity100).ToString(),
+                                                (cashDesk[0].Quantity50-cashDesk[1].Quantity50).ToString(),
+                                                (cashDesk[0].Quantity20-cashDesk[1].Quantity20).ToString(),
+                                                (cashDesk[0].Quantity10-cashDesk[1].Quantity10).ToString(),
+                                                (cashDesk[0].Quantity5-cashDesk[1].Quantity5).ToString(),
+                                                (cashDesk[0].Quantity2-cashDesk[1].Quantity2).ToString(),
+                                                (cashDesk[0].Quantity1-cashDesk[1].Quantity1).ToString(),
+                                                (cashDesk[0].Amount-cashDesk[1].Amount).ToString()
+                                            };
+                    this.CashDeskListView.Items.Add(new ListViewItem(itemValues));
+                }
             }
         }
 

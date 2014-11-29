@@ -32,6 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.OutcomeRB = new System.Windows.Forms.RadioButton();
             this.IncomeRB = new System.Windows.Forms.RadioButton();
+            this.IsBankCB = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +67,7 @@
             this.OutcomeRB.TabStop = true;
             this.OutcomeRB.Text = "Разход";
             this.OutcomeRB.UseVisualStyleBackColor = true;
+            this.OutcomeRB.CheckedChanged += new System.EventHandler(this.OutcomeRB_CheckedChanged);
             // 
             // IncomeRB
             // 
@@ -77,12 +79,25 @@
             this.IncomeRB.TabStop = true;
             this.IncomeRB.Text = "Приход";
             this.IncomeRB.UseVisualStyleBackColor = true;
+            this.IncomeRB.CheckedChanged += new System.EventHandler(this.IncomeRB_CheckedChanged);
+            // 
+            // IsBankCB
+            // 
+            this.IsBankCB.AutoSize = true;
+            this.IsBankCB.Location = new System.Drawing.Point(174, 51);
+            this.IsBankCB.Name = "IsBankCB";
+            this.IsBankCB.Size = new System.Drawing.Size(71, 17);
+            this.IsBankCB.TabIndex = 2;
+            this.IsBankCB.Text = "за банка";
+            this.IsBankCB.UseVisualStyleBackColor = true;
+            this.IsBankCB.CheckedChanged += new System.EventHandler(this.IsBankCB_CheckedChanged);
             // 
             // CategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 133);
+            this.ClientSize = new System.Drawing.Size(273, 133);
+            this.Controls.Add(this.IsBankCB);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.AddCategoryBtn);
             this.Name = "CategoryForm";
@@ -91,6 +106,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -101,5 +117,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton OutcomeRB;
         private System.Windows.Forms.RadioButton IncomeRB;
+        private System.Windows.Forms.CheckBox IsBankCB;
     }
 }

@@ -18,6 +18,8 @@ namespace MoneyV2._0
         private bool existingCategoryValue = false;
         private bool existingAimValue = false;
         private Menu parent;
+        public bool isNewCategorySaved = false;
+        public bool isNewCategoryForBank = false;
         public MoneyForm(Menu _parent)
         {
             InitializeComponent();
@@ -26,6 +28,7 @@ namespace MoneyV2._0
 
         private void OpenCategoryForm()
         {
+            isNewCategorySaved = false;
             var CategoryForm = new CategoryForm(this);
             CategoryForm.ShowDialog();
             
@@ -68,21 +71,33 @@ namespace MoneyV2._0
                     else
                     {
                         OpenCategoryForm();
-                        using (var db = new DatabaseContext())
+                        if(isNewCategorySaved==true)
                         {
-                            var newCategory = new Category();
-                            newCategory.CategoryName = currentSelectedCategory;
-                            if (isNewMoneyCategoryIncome == false)
+                            using (var db = new DatabaseContext())
                             {
-                                newCategory.isIncome = false;
+                                var newCategory = new Category();
+                                newCategory.CategoryName = currentSelectedCategory;
+                                if (isNewMoneyCategoryIncome == false)
+                                {
+                                    if (isNewCategoryForBank == true)
+                                    {
+                                        newCategory.isForBank = true;
+                                    }
+                                    else
+                                    {
+                                        newCategory.isForBank = false;
+                                    }
+                                    newCategory.isIncome = false;
+                                }
+                                else
+                                {
+                                    newCategory.isIncome = true;
+                                }
+                                db.Categories.Add(newCategory);
+                                db.SaveChanges();
                             }
-                            else
-                            {
-                                newCategory.isIncome = true;
-                            }
-                            db.Categories.Add(newCategory);
-                            db.SaveChanges();
                         }
+                        
                         ReloadData();
                         CategoryComboBox.Text = currentSelectedCategory;                        
                     }
@@ -136,15 +151,16 @@ namespace MoneyV2._0
 
         private void Control_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
-            {
-                this.SelectNextControl((Control)sender, false, true, true, true);
-            }
-            else if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {               
                 ValidateCategoryCombobox();
                 ValidateAimCombobox();
                 this.SelectNextControl((Control)sender, true, true, true, true);
+                if (this.ActiveControl.Name == this.MoneyFormSaveBtn.Name)
+                {
+                    AddMoneyToSession();
+                    this.Close();
+                }
             }          
                 
         }
@@ -165,7 +181,7 @@ namespace MoneyV2._0
         private void MoneyForm_Load(object sender, EventArgs e)
         {
             ComboboxesAdjustements();
-            ReloadData();
+            LoadData();
             
         }
 
@@ -186,28 +202,22 @@ namespace MoneyV2._0
                 AimComboBox.DataSource = aimslist;
             }
 
-            LockTextBoxesAndChangeColor();
+            TextBoxesChangeColor();
         }
 
-        private void LockTextBoxesAndChangeColor()
+        private void TextBoxesChangeColor()
         {
             if (isCurrentCategoryIncome)
             {
-                AimLabel.Text = "Източник: ";
-
-                TotalTB.TabIndex = 10;
                 CategoryComboBox.BackColor = Color.PaleGreen;
             }
             else
             {
-                AimLabel.Text = "Цел: ";
-
-                TotalTB.TabIndex = 2;
                 CategoryComboBox.BackColor = Color.LightSalmon;
             }
                 
         }
-        public void ReloadData()
+        public void LoadData()
         {
             
             using (var db = new DatabaseContext())
@@ -232,6 +242,11 @@ namespace MoneyV2._0
                 AimComboBox.DataSource = aimslist;
             }
         }
+
+        public void ReloadData()
+        {           
+            LoadData();            
+        }
         private void AddMoneyToSession()
         {
             using (var db = new DatabaseContext())
@@ -255,14 +270,21 @@ namespace MoneyV2._0
                 var deepCopy = (Money)moneyRecord.DeepCopy();
                 thisSession.Money.Add(deepCopy);
 
-                //if(additiveItems.Count!=0)
-                //{
-                //    foreach (var money in additiveItems)
-                //    {
-                //        var copy = money.DeepCopy();
-                //        thisSession.Money.Add(copy);
-                //    }
-                //}                
+                if(additiveItems.Count!=0)
+                {
+                    Money outcome;
+                    foreach (var item in additiveItems)
+                    {
+                        string categoryName = item[0];
+                        string aimName = item[1];
+                        var category = db.Categories.SingleOrDefault(x => x.CategoryName.Equals(categoryName));
+                        var aim = db.Aims.SingleOrDefault(x => x.AimName.Equals(aimName));
+                        outcome = new Money(category, aim, double.Parse(item[2]));
+                        outcome.Date = dateTimePicker.Value.Date;
+                        outcome.Note = NoteTextBox.Text;
+                        thisSession.Money.Add(outcome);
+                    }
+                }                
                 db.SaveChanges();
 
                 parent.MoneyFormWasSaved = true;
