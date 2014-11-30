@@ -62,11 +62,11 @@
     <Compile Include="Controllers\CategoryContext.cs" />
     <Compile Include="Controllers\MoneyContext.cs" />
     <Compile Include="Controllers\SessionContext.cs" />
-    <Compile Include="HistoryForm.cs">
+    <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HistoryForm.Designer.cs">
-      <DependentUpon>HistoryForm.cs</DependentUpon>
+    <Compile Include="SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ITranferData.cs" />
     <Compile Include="Interfaces\IForms.cs" />
@@ -104,8 +104,8 @@
     <EmbeddedResource Include="AdditiveOutcomeForm.resx">
       <DependentUpon>AdditiveOutcomeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HistoryForm.resx">
-      <DependentUpon>HistoryForm.cs</DependentUpon>
+    <EmbeddedResource Include="SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>

@@ -42,8 +42,8 @@ namespace MoneyV2._0
 
         private void OpenHistoryForm_Click(object sender, EventArgs e)
         {
-            var historyForm = new HistoryForm();
-            historyForm.Show();
+            var searchForm = new SearchForm();
+            searchForm.ShowDialog();
         }
 
         private void OpenMoneyFormBtn_Click(object sender, EventArgs e)

@@ -119,7 +119,6 @@ namespace MoneyV2._0
                         existingCategoryValue = true;
                     }
                 }
-                //If entered value isn't in the combobox, we add it in database
                 if (existingCategoryValue == false)
                 {                    
                     MessageBox.Show("Моля въведете валидна категория");  
