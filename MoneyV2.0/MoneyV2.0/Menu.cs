@@ -22,25 +22,27 @@ namespace MoneyV2._0
         {
             InitializeComponent();
         }
-
-        private void Menu_Load(object sender, EventArgs e)
+        private void CheckIfSessionExists()
         {
-            pickedDate = dateTimePicker.Value.Date;
-            //Check if Session exists in database
             using (var db = new DatabaseContext())
             {
-                var checkSessionExists =  db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
-                if (checkSessionExists==null || !checkSessionExists.Date.Equals(today))
+                var checkSessionExists = db.Sessions.SingleOrDefault(s => s.Date.Equals(today));
+                if (checkSessionExists == null || !checkSessionExists.Date.Equals(today))
                 {
                     db.Sessions.Add(new Session() { Date = today });
                     db.SaveChanges();
                 }
 
             }
+        }
+        private void Menu_Load(object sender, EventArgs e)
+        {
+            pickedDate = dateTimePicker.Value.Date;
+            CheckIfSessionExists();
             LoadData();
         }
 
-        private void OpenHistoryForm_Click(object sender, EventArgs e)
+        private void OpenSearchForm_Click(object sender, EventArgs e)
         {
             var searchForm = new SearchForm();
             searchForm.ShowDialog();
@@ -144,7 +146,7 @@ namespace MoneyV2._0
         }
         private void LoadCashDeskView()
         {
-            using (var db = new MoneyContext())
+            using (var db = new DatabaseContext())
             {
                 //extract Sum of all Incomes and Sum of all Outcomes, they are separated in cashDesk[0] and cashDesk[1]
                 var cashDesk = (from a in db.Money
@@ -160,23 +162,98 @@ namespace MoneyV2._0
                                     Quantity100 = b.Sum(x => x.Quantity100),
                                     BanknotiAmount = b.Sum(x => x.BanknotiAmount),
                                 }).ToList();
+
+                //query all money in todays session
+                var session = (from a in db.Sessions
+                                  from b in a.Moneys
+                                  where a.Date == today
+                                  select b).ToList();
+
                 //throws exception if there isn't cashdesk money
                 //Count needs to be 2 because cashdesk[1] is incomes and cashdesk[0] is outcomes
                 if (cashDesk.Count == 2)
                 {
-                    string[] itemValues = new string[] 
+                    int cashDeskQty100 = cashDesk[1].Quantity100 - cashDesk[0].Quantity100;
+                    int cashDeskQty50 = cashDesk[1].Quantity50-cashDesk[0].Quantity50;
+                    int cashDeskQty20 = cashDesk[1].Quantity20-cashDesk[0].Quantity20;
+                    int cashDeskQty10 = cashDesk[1].Quantity10-cashDesk[0].Quantity10;
+                    int cashDeskQty5 = cashDesk[1].Quantity5-cashDesk[0].Quantity5;
+                    int cashDeskQty2 = cashDesk[1].Quantity2-cashDesk[0].Quantity2;
+                    int cashDeskQty1 = cashDesk[1].Quantity1-cashDesk[0].Quantity1;
+                    int cashDeskBanknotiAmount = cashDesk[1].BanknotiAmount-cashDesk[0].BanknotiAmount;
+                    string[] cashDeskValues = new string[] 
                                         {
-                                            (cashDesk[1].Quantity100-cashDesk[0].Quantity100).ToString(),
-                                            (cashDesk[1].Quantity50-cashDesk[0].Quantity50).ToString(),
-                                            (cashDesk[1].Quantity20-cashDesk[0].Quantity20).ToString(),
-                                            (cashDesk[1].Quantity10-cashDesk[0].Quantity10).ToString(),
-                                            (cashDesk[1].Quantity5-cashDesk[0].Quantity5).ToString(),
-                                            (cashDesk[1].Quantity2-cashDesk[0].Quantity2).ToString(),
-                                            (cashDesk[1].Quantity1-cashDesk[0].Quantity1).ToString(),
-                                            (cashDesk[1].BanknotiAmount-cashDesk[0].BanknotiAmount).ToString()
-                                        };                    
-                   
-                    this.CashDeskListView.Items.Add(new ListViewItem(itemValues));
+                                            (cashDeskQty100).ToString(),
+                                            (cashDeskQty50).ToString(),
+                                            (cashDeskQty20).ToString(),
+                                            (cashDeskQty10).ToString(),
+                                            (cashDeskQty5).ToString(),
+                                            (cashDeskQty2).ToString(),
+                                            (cashDeskQty1).ToString(),
+                                            (cashDeskBanknotiAmount).ToString()
+                                        };
+
+                    int sessionDeskQty100 = 0;
+                    int sessionDeskQty50 = 0;
+                    int sessionDeskQty20 = 0;
+                    int sessionDeskQty10 = 0;
+                    int sessionDeskQty5 = 0;
+                    int sessionDeskQty2 = 0;
+                    int sessionDeskQty1 = 0;
+                    int sessionDeskBanknotiAmount = 0;
+                    foreach (var money in session)
+                    {
+                        if(money.Category.isIncome)
+                        {
+                            sessionDeskQty100 += money.Quantity100;
+                            sessionDeskQty50 += money.Quantity50;
+                            sessionDeskQty20 += money.Quantity20;
+                            sessionDeskQty10 += money.Quantity10;
+                            sessionDeskQty5 += money.Quantity5;
+                            sessionDeskQty2 += money.Quantity2;
+                            sessionDeskQty1 += money.Quantity1;
+                            sessionDeskBanknotiAmount += money.BanknotiAmount;
+                        }
+                        else
+                        {
+                            sessionDeskQty100 -= money.Quantity100;
+                            sessionDeskQty50 -= money.Quantity50;
+                            sessionDeskQty20 -= money.Quantity20;
+                            sessionDeskQty10 -= money.Quantity10;
+                            sessionDeskQty5 -= money.Quantity5;
+                            sessionDeskQty2 -= money.Quantity2;
+                            sessionDeskQty1 -= money.Quantity1;
+                            sessionDeskBanknotiAmount -= money.BanknotiAmount;
+                        }
+                        
+
+                    }
+                    string[] sessionDeskValues = new string[]
+                                        {
+                                            sessionDeskQty100.ToString(),
+                                            sessionDeskQty50.ToString(),
+                                            sessionDeskQty20.ToString(),
+                                            sessionDeskQty10.ToString(),
+                                            sessionDeskQty5.ToString(),
+                                            sessionDeskQty2.ToString(),
+                                            sessionDeskQty1.ToString(),
+                                            sessionDeskBanknotiAmount.ToString()
+                                        };
+                    string[] beforeSessionDeskValues = new string[]
+                                        {
+                                            (cashDeskQty100-sessionDeskQty100).ToString(),
+                                            (cashDeskQty50-sessionDeskQty50).ToString(),
+                                            (cashDeskQty20-sessionDeskQty20).ToString(),
+                                            (cashDeskQty10-sessionDeskQty10).ToString(),
+                                            (cashDeskQty5-sessionDeskQty5).ToString(),
+                                            (cashDeskQty2-sessionDeskQty2).ToString(),
+                                            (cashDeskQty1-sessionDeskQty1).ToString(),
+                                            (cashDeskBanknotiAmount-sessionDeskBanknotiAmount).ToString()
+                                        };
+
+                    this.CashDeskListView.Items.Add(new ListViewItem(cashDeskValues));
+                    this.CashDeskListView.Items.Add(new ListViewItem(sessionDeskValues));
+                    this.CashDeskListView.Items.Add(new ListViewItem(beforeSessionDeskValues));
                 }
             }
         }

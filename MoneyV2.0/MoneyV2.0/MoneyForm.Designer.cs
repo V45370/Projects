@@ -320,6 +320,7 @@ namespace MoneyV2._0
             // 
             // AdditiveListView
             // 
+            this.AdditiveListView.BackColor = System.Drawing.Color.LightCyan;
             this.AdditiveListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CategoryColumn,
             this.AimColumn,
@@ -399,6 +400,7 @@ namespace MoneyV2._0
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(785, 440);
             this.Controls.Add(this.AdditiveOutcomeBtn);
             this.Controls.Add(this.TotalTB);

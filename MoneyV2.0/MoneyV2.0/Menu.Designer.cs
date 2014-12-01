@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
-            this.OpenHistoryForm = new System.Windows.Forms.Button();
+            this.OpenSearchForm = new System.Windows.Forms.Button();
             this.OpenMoneyFormBtn = new System.Windows.Forms.Button();
             this.CashDeskListView = new System.Windows.Forms.ListView();
             this.Qty100Column = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -61,25 +61,30 @@
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // OpenHistoryForm
+            // OpenSearchForm
             // 
-            this.OpenHistoryForm.Location = new System.Drawing.Point(764, 186);
-            this.OpenHistoryForm.Name = "OpenHistoryForm";
-            this.OpenHistoryForm.Size = new System.Drawing.Size(112, 57);
-            this.OpenHistoryForm.TabIndex = 1;
-            this.OpenHistoryForm.Text = "Паричен поток";
-            this.OpenHistoryForm.UseVisualStyleBackColor = true;
-            this.OpenHistoryForm.Click += new System.EventHandler(this.OpenHistoryForm_Click);
+            this.OpenSearchForm.BackgroundImage = global::MoneyV2._0.Properties.Resources.search_icon;
+            this.OpenSearchForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.OpenSearchForm.Location = new System.Drawing.Point(779, 194);
+            this.OpenSearchForm.Name = "OpenSearchForm";
+            this.OpenSearchForm.Size = new System.Drawing.Size(74, 70);
+            this.OpenSearchForm.TabIndex = 1;
+            this.OpenSearchForm.Text = "Справка";
+            this.OpenSearchForm.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.OpenSearchForm.UseVisualStyleBackColor = true;
+            this.OpenSearchForm.Click += new System.EventHandler(this.OpenSearchForm_Click);
             // 
             // OpenMoneyFormBtn
             // 
             this.OpenMoneyFormBtn.BackColor = System.Drawing.SystemColors.Window;
             this.OpenMoneyFormBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OpenMoneyFormBtn.BackgroundImage")));
             this.OpenMoneyFormBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.OpenMoneyFormBtn.Location = new System.Drawing.Point(764, 115);
+            this.OpenMoneyFormBtn.Location = new System.Drawing.Point(779, 115);
             this.OpenMoneyFormBtn.Name = "OpenMoneyFormBtn";
-            this.OpenMoneyFormBtn.Size = new System.Drawing.Size(112, 65);
+            this.OpenMoneyFormBtn.Size = new System.Drawing.Size(74, 73);
             this.OpenMoneyFormBtn.TabIndex = 2;
+            this.OpenMoneyFormBtn.Text = "Пари";
+            this.OpenMoneyFormBtn.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.OpenMoneyFormBtn.UseVisualStyleBackColor = false;
             this.OpenMoneyFormBtn.Click += new System.EventHandler(this.OpenMoneyFormBtn_Click);
             // 
@@ -298,7 +303,7 @@
             this.Controls.Add(this.SessionView);
             this.Controls.Add(this.CashDeskListView);
             this.Controls.Add(this.OpenMoneyFormBtn);
-            this.Controls.Add(this.OpenHistoryForm);
+            this.Controls.Add(this.OpenSearchForm);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Menu";
@@ -313,7 +318,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button OpenHistoryForm;
+        private System.Windows.Forms.Button OpenSearchForm;
         private System.Windows.Forms.Button OpenMoneyFormBtn;
         private System.Windows.Forms.ListView CashDeskListView;
         private System.Windows.Forms.ListView SessionView;

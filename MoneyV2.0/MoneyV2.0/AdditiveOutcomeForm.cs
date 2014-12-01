@@ -14,8 +14,6 @@ namespace MoneyV2._0
 {
     public partial class AdditiveOutcomeForm : Form
     {
-        private bool existingAimValue = false;
-        private bool existingCategoryValue = false;
         private MoneyForm parent;
         public AdditiveOutcomeForm(MoneyForm _parent)
         {
@@ -107,7 +105,7 @@ namespace MoneyV2._0
 
         private void ValidateCategoryCombobox()
         {
-            existingCategoryValue = false;
+            var existingCategoryValue = false;
             //if selected control is CategoryComboBox
             if (this.ActiveControl.Name == this.CategoryComboBox.Name)
             {
@@ -121,13 +119,14 @@ namespace MoneyV2._0
                 }
                 if (existingCategoryValue == false)
                 {                    
-                    MessageBox.Show("Моля въведете валидна категория");  
+                    MessageBox.Show("Моля въведете валидна категория");
+                    CategoryComboBox.Text = String.Empty;
                 }
             }
         }
         private void ValidateAimCombobox()
         {
-            existingAimValue = false;
+            var existingAimValue = false;
             //if selected control is AimComboBox
             if (this.ActiveControl.Name == this.AimComboBox.Name)
             {
@@ -141,7 +140,22 @@ namespace MoneyV2._0
                 if (existingAimValue == false)
                 {                    
                     MessageBox.Show("Моля въведете валидна цел");
+                    CategoryComboBox.Text = String.Empty;
                 }
+            }
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (var db = new DatabaseContext())
+            {
+                var aims = from a in db.Categories
+                           from b in a.Aims
+                           where a.CategoryName == CategoryComboBox.Text
+                           select b.AimName;
+
+                var aimslist = aims.ToList<string>();
+                AimComboBox.DataSource = aimslist;
             }
         }
 
