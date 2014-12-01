@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.OpenSearchForm = new System.Windows.Forms.Button();
             this.OpenMoneyFormBtn = new System.Windows.Forms.Button();
@@ -58,6 +59,10 @@
             this.PreviusDateBtn = new System.Windows.Forms.Button();
             this.ThisComputerCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +96,7 @@
             // CashDeskListView
             // 
             this.CashDeskListView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.CashDeskListView.BackColor = System.Drawing.Color.Moccasin;
+            this.CashDeskListView.BackColor = System.Drawing.Color.PapayaWhip;
             this.CashDeskListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Qty100Column,
             this.Qty50Column,
@@ -103,7 +108,7 @@
             this.Total});
             this.CashDeskListView.Location = new System.Drawing.Point(32, 464);
             this.CashDeskListView.Name = "CashDeskListView";
-            this.CashDeskListView.Size = new System.Drawing.Size(504, 97);
+            this.CashDeskListView.Size = new System.Drawing.Size(505, 90);
             this.CashDeskListView.TabIndex = 3;
             this.CashDeskListView.UseCompatibleStateImageBehavior = false;
             this.CashDeskListView.View = System.Windows.Forms.View.Details;
@@ -289,12 +294,48 @@
             this.label1.TabIndex = 36;
             this.label1.Text = "Дата на сесия";
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(553, 491);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "Каса";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(551, 514);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.TabIndex = 38;
+            this.label3.Text = "Днес";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(553, 537);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(25, 13);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "Тук";
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(888, 589);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ThisComputerCheckBox);
             this.Controls.Add(this.PreviusDateBtn);
@@ -347,6 +388,10 @@
         private System.Windows.Forms.Button PreviusDateBtn;
         private System.Windows.Forms.CheckBox ThisComputerCheckBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

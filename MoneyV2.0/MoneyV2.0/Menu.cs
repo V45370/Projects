@@ -7,6 +7,7 @@ using MoneyV2._0.Controllers;
 using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace MoneyV2._0
 {
@@ -290,10 +291,16 @@ namespace MoneyV2._0
                                             (currentSessionDeskQty1).ToString(),
                                             (currentSessionDeskBanknotiAmount).ToString()
                                         };
+                    var cashdeskItem = new ListViewItem(cashDeskValues);
+                    cashdeskItem.ForeColor = Color.Red;
+                    var sessionDeskItem = new ListViewItem(sessionDeskValues);
+                    sessionDeskItem.ForeColor = Color.SteelBlue;
+                    var currentSessiondeskItem = new ListViewItem(currentSessionDeskValues);
+                    currentSessiondeskItem.ForeColor = Color.Green;
 
-                    this.CashDeskListView.Items.Add(new ListViewItem(cashDeskValues));
-                    this.CashDeskListView.Items.Add(new ListViewItem(sessionDeskValues));
-                    this.CashDeskListView.Items.Add(new ListViewItem(currentSessionDeskValues));
+                    this.CashDeskListView.Items.Add(cashdeskItem);
+                    this.CashDeskListView.Items.Add(sessionDeskItem);
+                    this.CashDeskListView.Items.Add(currentSessiondeskItem);
                 }
             }
         }

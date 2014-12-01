@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.SearchListView = new System.Windows.Forms.ListView();
+            this.numberColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.categoryColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.aimColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.amountColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ownerColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.noteColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DateCheckBox = new System.Windows.Forms.CheckBox();
             this.CategoryCheckBox = new System.Windows.Forms.CheckBox();
             this.AimCheckBox = new System.Windows.Forms.CheckBox();
@@ -45,13 +52,6 @@
             this.AimCB = new System.Windows.Forms.ComboBox();
             this.CategoryCB = new System.Windows.Forms.ComboBox();
             this.CloseBtn = new System.Windows.Forms.Button();
-            this.numberColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.categoryColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.aimColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.amountColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ownerColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.noteColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // SearchListView
@@ -71,6 +71,40 @@
             this.SearchListView.TabIndex = 14;
             this.SearchListView.UseCompatibleStateImageBehavior = false;
             this.SearchListView.View = System.Windows.Forms.View.Details;
+            // 
+            // numberColumn
+            // 
+            this.numberColumn.Text = "№";
+            // 
+            // dateColumn
+            // 
+            this.dateColumn.Text = "За Дата";
+            this.dateColumn.Width = 92;
+            // 
+            // categoryColumn
+            // 
+            this.categoryColumn.Text = "Категория";
+            this.categoryColumn.Width = 121;
+            // 
+            // aimColumn
+            // 
+            this.aimColumn.Text = "Цел";
+            this.aimColumn.Width = 97;
+            // 
+            // amountColumn
+            // 
+            this.amountColumn.Text = "Сума";
+            this.amountColumn.Width = 73;
+            // 
+            // ownerColumn
+            // 
+            this.ownerColumn.Text = "От Компютър";
+            this.ownerColumn.Width = 113;
+            // 
+            // noteColumn
+            // 
+            this.noteColumn.Text = "Бележка";
+            this.noteColumn.Width = 224;
             // 
             // DateCheckBox
             // 
@@ -235,40 +269,6 @@
             this.CloseBtn.TabIndex = 8;
             this.CloseBtn.Text = "Затвори";
             this.CloseBtn.UseVisualStyleBackColor = false;
-            // 
-            // numberColumn
-            // 
-            this.numberColumn.Text = "№";
-            // 
-            // dateColumn
-            // 
-            this.dateColumn.Text = "За Дата";
-            this.dateColumn.Width = 92;
-            // 
-            // categoryColumn
-            // 
-            this.categoryColumn.Text = "Категория";
-            this.categoryColumn.Width = 121;
-            // 
-            // aimColumn
-            // 
-            this.aimColumn.Text = "Цел";
-            this.aimColumn.Width = 97;
-            // 
-            // amountColumn
-            // 
-            this.amountColumn.Text = "Сума";
-            this.amountColumn.Width = 73;
-            // 
-            // ownerColumn
-            // 
-            this.ownerColumn.Text = "От Компютър";
-            this.ownerColumn.Width = 113;
-            // 
-            // noteColumn
-            // 
-            this.noteColumn.Text = "Бележка";
-            this.noteColumn.Width = 224;
             // 
             // SearchForm
             // 
