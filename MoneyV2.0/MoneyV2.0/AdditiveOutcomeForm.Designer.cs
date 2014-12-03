@@ -63,6 +63,7 @@
             this.AimComboBox.Size = new System.Drawing.Size(121, 21);
             this.AimComboBox.TabIndex = 2;
             this.AimComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.AimComboBox.Leave += new System.EventHandler(this.AimComboBox_Leave);
             // 
             // CategoryComboBox
             // 
@@ -73,6 +74,7 @@
             this.CategoryComboBox.TabIndex = 1;
             this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             this.CategoryComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.CategoryComboBox.Leave += new System.EventHandler(this.CategoryComboBox_Leave);
             // 
             // AdditiveOutcomeSaveBtn
             // 
@@ -93,7 +95,9 @@
             this.AmountTB.Size = new System.Drawing.Size(63, 20);
             this.AmountTB.TabIndex = 3;
             this.AmountTB.Text = "0";
+            this.AmountTB.TextChanged += new System.EventHandler(this.AmountTB_TextChanged);
             this.AmountTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.AmountTB.Leave += new System.EventHandler(this.AmountTB_Leave);
             // 
             // label1
             // 
@@ -119,6 +123,7 @@
             this.Controls.Add(this.CategoryComboBox);
             this.Name = "AdditiveOutcomeForm";
             this.Text = "Допълнителна сума";
+            this.Load += new System.EventHandler(this.AdditiveOutcomeForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

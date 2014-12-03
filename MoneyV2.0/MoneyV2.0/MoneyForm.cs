@@ -22,6 +22,7 @@ namespace MoneyV2._0
         public bool isNewCategoryForBank = false;
         public MoneyForm(Menu _parent)
         {
+            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
             parent = _parent;
         }
@@ -316,18 +317,15 @@ namespace MoneyV2._0
         private void OnTextChanged(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            double a;
-            if (!double.TryParse(textBox.Text, out a))
+            int a;
+            if (!int.TryParse(textBox.Text, out a))
             {
                 textBox.Text = "0";
                 MessageBox.Show("Моля въведете валидно число.");
             }
             else
             {
-                if(textBox.Name!=BanknotiAmountTB.Name)
-                {
-                    ChangeAmountsOnTextChanged();
-                }
+                ChangeAmountsOnTextChanged();
                 
             }
         }
@@ -341,12 +339,16 @@ namespace MoneyV2._0
         {
            this. dateTimePicker.Value = dateTimePicker.Value.AddDays(-1);
         }
-
-        private void AdditiveOutcomeBtn_Click(object sender, EventArgs e)
+        private void OpenAdditiveOutcomeForm()
         {
             var additiveOutcomeForm = new AdditiveOutcomeForm(this);
             additiveOutcomeForm.ShowDialog(this);
             ReloadAdditiveListViewAndAdditiveAmount();
+        }
+
+        private void AdditiveOutcomeBtn_Click(object sender, EventArgs e)
+        {
+            OpenAdditiveOutcomeForm();
 
         }
         private void ReloadAdditiveListViewAndAdditiveAmount()
@@ -364,6 +366,14 @@ namespace MoneyV2._0
         private void AdditiveAmountTB_TextChanged(object sender, EventArgs e)
         {
             ChangeAmountsOnTextChanged();
+        }
+
+        private void MoneyForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && isCurrentCategoryIncome==true)
+            {
+                OpenAdditiveOutcomeForm();
+            }
         }
     }
 }

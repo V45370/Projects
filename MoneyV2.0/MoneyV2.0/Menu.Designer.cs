@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.OpenSearchForm = new System.Windows.Forms.Button();
             this.OpenMoneyFormBtn = new System.Windows.Forms.Button();
@@ -49,21 +48,14 @@
             this.AmountColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.OwnerColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.NoteColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.новаСумаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.излезToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.NextDateBtn = new System.Windows.Forms.Button();
             this.PreviusDateBtn = new System.Windows.Forms.Button();
             this.ThisComputerCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // OpenSearchForm
@@ -106,9 +98,10 @@
             this.Qty2Column,
             this.Qty1Column,
             this.Total});
+            this.CashDeskListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CashDeskListView.Location = new System.Drawing.Point(32, 464);
             this.CashDeskListView.Name = "CashDeskListView";
-            this.CashDeskListView.Size = new System.Drawing.Size(505, 90);
+            this.CashDeskListView.Size = new System.Drawing.Size(505, 101);
             this.CashDeskListView.TabIndex = 3;
             this.CashDeskListView.UseCompatibleStateImageBehavior = false;
             this.CashDeskListView.View = System.Windows.Forms.View.Details;
@@ -165,7 +158,9 @@
             this.AmountColumn,
             this.OwnerColumn,
             this.NoteColumn});
+            this.SessionView.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SessionView.FullRowSelect = true;
+            this.SessionView.GridLines = true;
             this.SessionView.Location = new System.Drawing.Point(32, 115);
             this.SessionView.Name = "SessionView";
             this.SessionView.Size = new System.Drawing.Size(726, 330);
@@ -206,44 +201,6 @@
             // 
             this.NoteColumn.Text = "Бележка";
             this.NoteColumn.Width = 200;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.optionsToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(888, 24);
-            this.menuStrip1.TabIndex = 5;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.новаСумаToolStripMenuItem,
-            this.излезToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // новаСумаToolStripMenuItem
-            // 
-            this.новаСумаToolStripMenuItem.Name = "новаСумаToolStripMenuItem";
-            this.новаСумаToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.новаСумаToolStripMenuItem.Text = "Нова сума";
-            // 
-            // излезToolStripMenuItem
-            // 
-            this.излезToolStripMenuItem.Name = "излезToolStripMenuItem";
-            this.излезToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.излезToolStripMenuItem.Text = "Излез";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
             // 
             // dateTimePicker
             // 
@@ -294,16 +251,10 @@
             this.label1.TabIndex = 36;
             this.label1.Text = "Дата на сесия";
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(553, 491);
+            this.label2.Location = new System.Drawing.Point(543, 491);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 37;
@@ -312,7 +263,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(551, 514);
+            this.label3.Location = new System.Drawing.Point(543, 513);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 38;
@@ -321,7 +272,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(553, 537);
+            this.label4.Location = new System.Drawing.Point(543, 537);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(25, 13);
             this.label4.TabIndex = 39;
@@ -345,13 +296,9 @@
             this.Controls.Add(this.CashDeskListView);
             this.Controls.Add(this.OpenMoneyFormBtn);
             this.Controls.Add(this.OpenSearchForm);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Menu";
             this.Text = "Money Меню";
             this.Load += new System.EventHandler(this.Menu_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -371,11 +318,6 @@
         private System.Windows.Forms.ColumnHeader Qty2Column;
         private System.Windows.Forms.ColumnHeader Qty1Column;
         private System.Windows.Forms.ColumnHeader Total;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem новаСумаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem излезToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader NumberColumn;
         private System.Windows.Forms.ColumnHeader DateColumn;
         private System.Windows.Forms.ColumnHeader CategoryColumn;
@@ -388,7 +330,6 @@
         private System.Windows.Forms.Button PreviusDateBtn;
         private System.Windows.Forms.CheckBox ThisComputerCheckBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

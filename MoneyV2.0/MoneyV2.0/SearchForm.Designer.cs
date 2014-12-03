@@ -65,6 +65,8 @@
             this.amountColumn,
             this.ownerColumn,
             this.noteColumn});
+            this.SearchListView.FullRowSelect = true;
+            this.SearchListView.GridLines = true;
             this.SearchListView.Location = new System.Drawing.Point(12, 139);
             this.SearchListView.Name = "SearchListView";
             this.SearchListView.Size = new System.Drawing.Size(809, 356);
@@ -171,6 +173,7 @@
             this.FromAmountTB.Size = new System.Drawing.Size(59, 20);
             this.FromAmountTB.TabIndex = 3;
             this.FromAmountTB.Text = "0";
+            this.FromAmountTB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.FromAmountTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // SearchBtn
@@ -201,6 +204,7 @@
             this.ToAmountTB.Size = new System.Drawing.Size(59, 20);
             this.ToAmountTB.TabIndex = 4;
             this.ToAmountTB.Text = "0";
+            this.ToAmountTB.TextChanged += new System.EventHandler(this.OnTextChanged);
             this.ToAmountTB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // label1

@@ -16,6 +16,7 @@ namespace MoneyV2._0
     {
         public SearchForm()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
             ComboboxesAdjustements();
         }
@@ -254,6 +255,16 @@ namespace MoneyV2._0
                 }
             }
 
+        }
+        private void OnTextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            double a;
+            if (!double.TryParse(textBox.Text, out a))
+            {
+                textBox.Text = "0";
+                MessageBox.Show("Моля въведете валидно число.");
+            }
         }
     }
 }

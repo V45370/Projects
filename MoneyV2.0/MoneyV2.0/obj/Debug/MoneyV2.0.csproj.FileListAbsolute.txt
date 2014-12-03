@@ -33,3 +33,9 @@ F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.csproj.Generat
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2.0.csprojResolveAssemblyReference.cache
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.AdditiveOutcomeForm.resources
 F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\obj\Debug\MoneyV2._0.SearchForm.resources
+F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\NTier.Common.Domain.dll
+F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\NTier.Server.Domain.dll
+F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\NTier.Server.Domain.Repositories.EntityFramework.dll
+F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\Remote.Linq.dll
+F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\NTier.Server.Domain.Repositories.EntityFramework.pdb
+F:\GitRepository\Projects\MoneyV2.0\MoneyV2.0\bin\Debug\Remote.Linq.pdb

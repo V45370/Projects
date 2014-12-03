@@ -11,7 +11,7 @@ namespace MoneyV2._0
     {
         public CategoryForm(MoneyForm parent)
         {
-            
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
             
             this.parent = parent;

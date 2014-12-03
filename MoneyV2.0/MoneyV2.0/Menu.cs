@@ -21,6 +21,7 @@ namespace MoneyV2._0
         private DateTime pickedDate;
         public Menu()
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             InitializeComponent();
         }
         private void CheckIfSessionExists()
